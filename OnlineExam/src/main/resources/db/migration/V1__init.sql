@@ -14,6 +14,7 @@ CREATE TABLE tb_subject (
   id INT NOT NULL AUTO_INCREMENT,
   subject_name VARCHAR(255),
   start_date TIMESTAMP,
+  end_date TIMESTAMP,
   PRIMARY KEY (id));
   
 CREATE TABLE tb_marks (
