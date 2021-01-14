@@ -11,5 +11,5 @@ import vn.kase.onlineExam.model.Question;
 public interface QuestionRepository extends CrudRepository<Question, Integer>{
 
 	List<Question> findAllBySubjectId(Integer id);
-
+	Integer deleteBySubjectId(Integer id);
 }
