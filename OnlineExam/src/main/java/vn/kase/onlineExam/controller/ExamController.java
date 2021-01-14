@@ -38,7 +38,7 @@ public class ExamController {
 	
 	// === DATA RETURN SECTION ===
 	
-	@GetMapping("/exam/{subjectId}")
+	@GetMapping("api/exam/{subjectId}")
 	@ResponseBody
 	public ExamEditorVM getExam(@PathVariable Integer subjectId) {
 		ExamEditorVM examVM = new ExamEditorVM();
@@ -54,7 +54,7 @@ public class ExamController {
 		return examVM;
 	}
 	
-	@PostMapping("/exam")
+	@PostMapping("api/exam")
 	@ResponseBody
 	public ExamEditorVM saveExam(@RequestBody ExamEditorVM examPlan) {
 		Subject savedSubject = subjectRepo.save(examPlan.getSubject());
@@ -70,7 +70,7 @@ public class ExamController {
 		return savedExam;
 	}
 	
-	@DeleteMapping("/exam/{subjectId}")
+	@DeleteMapping("api/exam/{subjectId}")
 	@ResponseBody
 	@Transactional
 	public Boolean deleteExam(@PathVariable Integer subjectId) {
