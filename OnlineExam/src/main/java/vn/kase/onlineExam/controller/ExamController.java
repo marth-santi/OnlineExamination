@@ -39,7 +39,17 @@ public class ExamController {
 	@GetMapping("/exam/{subjectId}")
 	@ResponseBody
 	public ExamEditorVM getExam(@PathVariable Integer subjectId) {
-		return null;
+		ExamEditorVM examVM = new ExamEditorVM();
+		Subject subject = subjectRepo.findById(subjectId).orElse(null);
+		if (subject == null)
+			return null;
+		
+		examVM.setSubject(subject);
+		
+		List<Question> questions = questionRepo.findAllBySubjectId(subject.getId());		
+		examVM.setQuestions(questions);
+		
+		return examVM;
 	}
 	
 	@PostMapping("/exam")
