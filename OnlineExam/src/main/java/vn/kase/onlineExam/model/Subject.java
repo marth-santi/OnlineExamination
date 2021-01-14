@@ -1,12 +1,15 @@
 package vn.kase.onlineExam.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import lombok.Data;
 
@@ -24,24 +27,15 @@ public class Subject implements Serializable {
 	@GeneratedValue
     private Integer id;
 
-    @Column(name = "question")
-    private String question;
+    @Column(name = "subject_name")
+    private String subjectName;
 
-    @Column(name = "op1")
-    private String op1;
+    @Column(name = "start_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date startDate;
 
-    @Column(name = "op2")
-    private String op2;
+    @Column(name = "end_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date endDate;
 
-    @Column(name = "op3")
-    private String op3;
-
-    @Column(name = "op4")
-    private String op4;
-
-    @Column(name = "answer")
-    private String answer;
-    
-    @Column(name = "subject_id")
-    private Integer subjectId;
 }
