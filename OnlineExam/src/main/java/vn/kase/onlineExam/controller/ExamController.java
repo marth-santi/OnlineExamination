@@ -26,8 +26,6 @@ public class ExamController {
 	private QuestionRepository questionRepo;
 	@Autowired
 	private SubjectRepository subjectRepo;
-
-	// === VIEW RETURN SECTION ===
 	
 	@GetMapping("/exam/editor")
 	public ModelAndView createExam() {
@@ -36,47 +34,6 @@ public class ExamController {
 		return modelView;
 	}
 	
-	// === DATA RETURN SECTION ===
-	
-	@GetMapping("api/exam/{subjectId}")
-	@ResponseBody
-	public Exam getExam(@PathVariable Integer subjectId) {
-		Exam exam = new Exam();
-		Subject subject = subjectRepo.findById(subjectId).orElse(null);
-		if (subject == null)
-			return null;
 		
-		exam.setSubject(subject);
-		
-		List<Question> questions = questionRepo.findAllBySubjectId(subject.getId());		
-		exam.setQuestions(questions);
-		
-		return exam;
-	}
-	
-	@PostMapping("api/exam")
-	@ResponseBody
-	public Exam saveExam(@RequestBody Exam examPlan) {
-		Subject savedSubject = subjectRepo.save(examPlan.getSubject());
-		for (Question question : examPlan.getQuestions()) {
-			question.setSubjectId(savedSubject.getId());
-		}
-		List<Question> savedQuestions = (List<Question>) questionRepo.saveAll(examPlan.getQuestions());
-		
-		Exam savedExam = new Exam();
-		savedExam.setQuestions(savedQuestions);
-		savedExam.setSubject(savedSubject);
-		
-		return savedExam;
-	}
-	
-	@DeleteMapping("api/exam/{subjectId}")
-	@ResponseBody
-	@Transactional
-	public Boolean deleteExam(@PathVariable Integer subjectId) {
-		Integer res = questionRepo.deleteBySubjectId(subjectId);
-		subjectRepo.deleteById(subjectId);
-		return res == 0 ? false : true;
-	}
 }
 
