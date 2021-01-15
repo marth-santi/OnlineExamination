@@ -17,7 +17,7 @@ import vn.kase.onlineExam.model.Question;
 import vn.kase.onlineExam.model.Subject;
 import vn.kase.onlineExam.repository.QuestionRepository;
 import vn.kase.onlineExam.repository.SubjectRepository;
-import vn.kase.onlineExam.viewModel.ExamEditorVM;
+import vn.kase.onlineExam.viewModel.Exam;
 
 @RestController
 public class ExamController {
@@ -40,30 +40,30 @@ public class ExamController {
 	
 	@GetMapping("api/exam/{subjectId}")
 	@ResponseBody
-	public ExamEditorVM getExam(@PathVariable Integer subjectId) {
-		ExamEditorVM examVM = new ExamEditorVM();
+	public Exam getExam(@PathVariable Integer subjectId) {
+		Exam exam = new Exam();
 		Subject subject = subjectRepo.findById(subjectId).orElse(null);
 		if (subject == null)
 			return null;
 		
-		examVM.setSubject(subject);
+		exam.setSubject(subject);
 		
 		List<Question> questions = questionRepo.findAllBySubjectId(subject.getId());		
-		examVM.setQuestions(questions);
+		exam.setQuestions(questions);
 		
-		return examVM;
+		return exam;
 	}
 	
 	@PostMapping("api/exam")
 	@ResponseBody
-	public ExamEditorVM saveExam(@RequestBody ExamEditorVM examPlan) {
+	public Exam saveExam(@RequestBody Exam examPlan) {
 		Subject savedSubject = subjectRepo.save(examPlan.getSubject());
 		for (Question question : examPlan.getQuestions()) {
 			question.setSubjectId(savedSubject.getId());
 		}
 		List<Question> savedQuestions = (List<Question>) questionRepo.saveAll(examPlan.getQuestions());
 		
-		ExamEditorVM savedExam = new ExamEditorVM();
+		Exam savedExam = new Exam();
 		savedExam.setQuestions(savedQuestions);
 		savedExam.setSubject(savedSubject);
 		

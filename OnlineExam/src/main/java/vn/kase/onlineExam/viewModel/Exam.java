@@ -7,7 +7,7 @@ import vn.kase.onlineExam.model.Question;
 import vn.kase.onlineExam.model.Subject;
 
 @Data
-public class ExamEditorVM {
+public class Exam {
 	private Subject subject;
 	private List<Question> questions;
 }
