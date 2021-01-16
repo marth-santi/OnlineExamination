@@ -1,5 +1,5 @@
 function addNewQuestion(){
-	fetch("../question/add", {
+	fetch(CURRENT_URL + "/question/add", {
 		method: 'get'
 	})
 		.then((response) => response.text())
