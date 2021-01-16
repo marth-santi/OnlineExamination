@@ -1,5 +1,6 @@
 package vn.kase.onlineExam.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,17 @@ public class ExamController {
 	public ModelAndView createExam() {
 		ModelAndView modelView = new ModelAndView();
 		modelView.setViewName("exam/editor");
+		
+		Exam exam = new Exam();
+		// Mock data
+		Subject subject = new Subject();
+		subject.setSubjectName("Math");
+		List<Question> questions = new ArrayList<Question>();
+		exam.setQuestions(questions);
+		exam.setSubject(subject);
+		// End mock data
+		
+		modelView.addObject(exam);
 		return modelView;
 	}
 	

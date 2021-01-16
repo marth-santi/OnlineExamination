@@ -12,3 +12,4 @@ spring:
   resources:
     chain.strategy.content.enabled: true
     chain.strategy.content.paths: /**
+    static-locations: classpath:/static/,classpath:/templates/

@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="headerfiles">
+	<meta charset="UTF-8" />
+	<link th:href="@{/css/styles.css}" rel="stylesheet">
+</head>
+<body>
+
+	<div th:fragment="subject (subjectName)">
+		<div>
+			Subject
+		</div>
+		<div>
+			<table class="table">
+				<tr>
+					<td>
+						Name
+					</td>
+					<td th:text="#{subjectName}">
+						Subject Name
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+	</div>
+
+	<div th:fragment="question">
+		<div>
+			Question
+		</div>
+		<div>
+			Response options
+		</div>
+	</div>
+	
+</body>
