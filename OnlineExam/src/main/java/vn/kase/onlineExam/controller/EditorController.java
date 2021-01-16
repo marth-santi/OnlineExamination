@@ -9,6 +9,8 @@ public class EditorController {
 
 	@GetMapping("/question/add")
 	public ModelAndView addQuestion() {
-		return null;
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("exam/editorFragment :: question");
+		return mv;
 	}
 }

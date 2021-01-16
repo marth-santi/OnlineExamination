@@ -1,3 +1,10 @@
 function addNewQuestion(){
-	alert("add new question");
+	fetch("../question/add", {
+		method: 'get'
+	})
+		.then((response) => response.text())
+		.then(fragment => {
+			console.log(fragment);
+			$("#questionList").append(fragment);
+		});
 }
