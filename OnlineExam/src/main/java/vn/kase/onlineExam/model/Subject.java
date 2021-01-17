@@ -1,7 +1,7 @@
 package vn.kase.onlineExam.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,11 +32,9 @@ public class Subject implements Serializable {
     private String subjectName;
 
     @Column(name = "start_date")
-    @Temporal(TemporalType.TIMESTAMP)
     private Date startDate;
 
     @Column(name = "end_date")
-    @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
 
 }

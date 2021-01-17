@@ -2,14 +2,21 @@ server:
   port: 8080
 spring:
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/OnlineExamination?useSSL=false&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
     username: root
     password: password
-  jpa: 
+  jpa:
     show-sql: true
     database-platform: org.hibernate.dialect.MySQL8Dialect
-  resources:
+    database: mysql
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+  web.resources:
     chain.strategy.content.enabled: true
     chain.strategy.content.paths: /**
     static-locations: classpath:/static/,classpath:/templates/
+  flyway:
+    baseline-on-migrate: true
+    create-schemas: true

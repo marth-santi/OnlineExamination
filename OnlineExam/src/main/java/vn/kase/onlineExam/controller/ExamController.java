@@ -45,7 +45,7 @@ public class ExamController {
 	@PostMapping("/exam/submitExam")
 	public String submitExam(@ModelAttribute(value = "exam") Exam exam) {
 		System.out.println(exam.toString());
-		return "success";
+		return exam.toString();
 	}
 		
 }

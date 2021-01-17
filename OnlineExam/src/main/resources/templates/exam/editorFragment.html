@@ -6,7 +6,7 @@
   </head>
   <body>
     <!-- Subject fragment -->
-    <div th:fragment="subject (subject)" class="card m-2 border border-primary">
+    <div th:fragment="subject (exam)" class="card m-2 border border-primary">
       <div class="card-header p-2 bg-info text-white h3">Subject</div>
       <div class="card-body p-2">
         <div class="input-group">
@@ -17,7 +17,8 @@
             <input
               type="text"
               class="form-control"
-              th:value="${subject.subjectName}"
+              th:value="${exam.subject.subjectName}"
+              th:field="${exam.subject.subjectName}"
             />
           </div>
           <div class="input-group mb-3">
@@ -27,7 +28,8 @@
             <input
               type="date"
               class="form-control"
-              th:value="${subject.subjectName}"
+              th:value="${exam.subject.startDate}"
+              th:field="${exam.subject.startDate}"
             />
           </div>
           <div class="input-group mb-3">
@@ -37,7 +39,8 @@
             <input
               type="date"
               class="form-control"
-              th:value="${subject.subjectName}"
+              th:value="${exam.subject.endDate}"
+              th:field="${exam.subject.endDate}"
             />
           </div>
         </div>
