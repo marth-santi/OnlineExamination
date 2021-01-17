@@ -17,7 +17,27 @@
             <input
               type="text"
               class="form-control"
-              placeholder="${subject.subjectName}"
+              th:value="${subject.subjectName}"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Start Date</span>
+            </div>
+            <input
+              type="date"
+              class="form-control"
+              th:value="${subject.subjectName}"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">End Date</span>
+            </div>
+            <input
+              type="date"
+              class="form-control"
+              th:value="${subject.subjectName}"
             />
           </div>
         </div>
