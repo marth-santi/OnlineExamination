@@ -6,20 +6,21 @@
   </head>
   <body>
     <!-- Subject fragment -->
-    <div th:fragment="subject (subject)">
-      <div>Subject</div>
-      <div>
-        <table class="table">
-          <tr>
-            <td>Name</td>
-            <td
-              th:value="value = ${subject.subjectName}"
-              th:field="*{subject.subjectName}"
-            >
-              Subject Name
-            </td>
-          </tr>
-        </table>
+    <div th:fragment="subject (subject)" class="card m-2 border border-primary">
+      <div class="card-header p-2 bg-info text-white h3">Subject</div>
+      <div class="card-body p-2">
+        <div class="input-group">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Subject Name</span>
+            </div>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="${subject.subjectName}"
+            />
+          </div>
+        </div>
       </div>
     </div>
 

@@ -10,33 +10,40 @@
   </head>
   <body>
     <div layout:fragment="content">
-      <div>Exam Editor</div>
-      <div id="examTemplate">
-        <div
-          id="subject"
-          th:replace="exam/editorFragment :: subject(${exam.subject})"
-        ></div>
+      <form
+        action="#"
+        th:action="@{/exam/submitExam}"
+        th:object="${exam}"
+        method="POST"
+      >
+        <div>Exam Editor</div>
+        <div id="examTemplate">
+          <div
+            id="subject"
+            th:replace="exam/editorFragment :: subject(${exam.subject})"
+          ></div>
 
-        <div>
-          <button type="button" class="btn btn-danger m-3" onClick="">
-            Cancel
-          </button>
-          <button type="button" class="btn btn-success m-3" onClick="">
-            Submit Exam
+          <div>
+            <button type="button" class="btn btn-danger m-3" onClick="">
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-success m-3" onClick="">
+              Submit Exam
+            </button>
+          </div>
+
+          <hr />
+
+          <div id="questionList"></div>
+          <button
+            type="button"
+            class="btn btn-primary m-3"
+            onClick="addNewQuestion();"
+          >
+            Add new question
           </button>
         </div>
-
-        <hr />
-
-        <div id="questionList"></div>
-        <button
-          type="button"
-          class="btn btn-primary m-3"
-          onClick="addNewQuestion();"
-        >
-          Add new question
-        </button>
-      </div>
+      </form>
 
       <!-- Editor Script -->
       <script src="/exam/editor.js"></script>
