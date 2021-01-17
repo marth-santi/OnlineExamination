@@ -7,7 +7,9 @@
   <body>
     <!-- Subject fragment -->
     <div th:fragment="subject (subject)" class="card m-2 border border-primary">
-      <div class="card-header p-2 bg-info text-white h3">Subject</div>
+      <div class="card-header p-2 bg-info text-white h3 font-weight-bold">
+        Subject
+      </div>
       <div class="card-body p-2">
         <div class="input-group">
           <div class="input-group mb-3">
@@ -45,61 +47,110 @@
     </div>
 
     <!-- Single choice question fragment -->
-    <div th:fragment="question (question)" class="card m-2">
-      <div class="card-header">Question</div>
+    <div th:fragment="questionSingle (question)" class="card m-2">
+      <div class="card-header bg-warning h4">
+        <input
+          type="text"
+          placeholder="Question"
+          class="form-control font-weight-bold"
+        />
+      </div>
       <div class="card-body">
-        <ul class="list-group input-group">
-          <li class="list-group-item form-inline">
-            <input
-              name="answer"
-              type="radio"
-              value="1"
-              class="form-control mr-2"
-            />
-            <input
-              type="text"
-              placeholder="Option 1"
-              class="form-control w-80"
-            />
+        <ul class="list-group">
+          <li class="list-group-item">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input name="answer" type="radio" value="1" />
+                </div>
+              </div>
+              <input type="text" placeholder="Option 1" class="form-control" />
+            </div>
           </li>
-          <li class="list-group-item form-inline">
-            <input
-              name="answer"
-              type="radio"
-              value="2"
-              class="form-control mr-2"
-            />
-            <input
-              type="text"
-              placeholder="Option 2"
-              class="form-control w-80"
-            />
+          <li class="list-group-item">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input name="answer" type="radio" value="2" />
+                </div>
+              </div>
+              <input type="text" placeholder="Option 2" class="form-control" />
+            </div>
           </li>
-          <li class="list-group-item form-inline">
-            <input
-              name="answer"
-              type="radio"
-              value="3"
-              class="form-control mr-2"
-            />
-            <input
-              type="text"
-              placeholder="Option 3"
-              class="form-control w-80"
-            />
+          <li class="list-group-item">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input name="answer" type="radio" value="3" />
+                </div>
+              </div>
+              <input type="text" placeholder="Option 3" class="form-control" />
+            </div>
           </li>
-          <li class="list-group-item form-inline">
-            <input
-              name="answer"
-              type="radio"
-              value="4"
-              class="form-control mr-2"
-            />
-            <input
-              type="text"
-              placeholder="Option 4"
-              class="form-control w-80"
-            />
+          <li class="list-group-item">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input name="answer" type="radio" value="4" />
+                </div>
+              </div>
+              <input type="text" placeholder="Option 4" class="form-control" />
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Multiple choice question fragment -->
+    <div th:fragment="questionMultiple (question)" class="card m-2">
+      <div class="card-header bg-warning">
+        <input
+          type="text"
+          placeholder="Question"
+          class="form-control font-weight-bold"
+        />
+      </div>
+      <div class="card-body">
+        <ul class="list-group">
+          <li class="list-group-item">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input name="answer" type="checkbox" value="1" />
+                </div>
+              </div>
+              <input type="text" placeholder="Option 1" class="form-control" />
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input name="answer" type="checkbox" value="2" />
+                </div>
+              </div>
+              <input type="text" placeholder="Option 2" class="form-control" />
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input name="answer" type="checkbox" value="3" />
+                </div>
+              </div>
+              <input type="text" placeholder="Option 3" class="form-control" />
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input name="answer" type="checkbox" value="4" />
+                </div>
+              </div>
+              <input type="text" placeholder="Option 4" class="form-control" />
+            </div>
           </li>
         </ul>
       </div>

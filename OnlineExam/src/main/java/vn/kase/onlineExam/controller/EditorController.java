@@ -10,7 +10,7 @@ public class EditorController {
 	@GetMapping("/question/add")
 	public ModelAndView addQuestion() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("exam/editorFragment :: question");
+		mv.setViewName("exam/editorFragment :: questionMultiple");
 		return mv;
 	}
 }
