@@ -1,30 +1,45 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout}">
-<head>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}"
+>
+  <head>
     <title>Exam Editor</title>
-</head>
-<body>
+  </head>
+  <body>
+    <div layout:fragment="content">
+      <div>Exam Editor</div>
+      <div id="examTemplate">
+        <div
+          id="subject"
+          th:replace="exam/editorFragment :: subject(${exam.subject})"
+        ></div>
 
-	<div layout:fragment="content">
-	    <div>
-	    	Exam Editor
-	    </div>
-	    <div id="examTemplate">
-	    	<div id="subject" th:replace="exam/editorFragment :: subject('Cau hoi')"></div>
-	    	<div id="questionList"></div>
-	    	<button type="button" class="btn btn-primary" onClick="addNewQuestion();">
-	    		Add new question
-	    	</button>
-	    </div>
-	    
-	    
-	    
-	    <!-- Editor Script -->
-		<script src="/exam/editor.js"></script>
-	</div>
+        <div>
+          <button type="button" class="btn btn-danger m-3" onClick="">
+            Cancel
+          </button>
+          <button type="button" class="btn btn-success m-3" onClick="">
+            Submit Exam
+          </button>
+        </div>
 
-	
-</body>
+        <hr />
+
+        <div id="questionList"></div>
+        <button
+          type="button"
+          class="btn btn-primary m-3"
+          onClick="addNewQuestion();"
+        >
+          Add new question
+        </button>
+      </div>
+
+      <!-- Editor Script -->
+      <script src="/exam/editor.js"></script>
+    </div>
+  </body>
 </html>

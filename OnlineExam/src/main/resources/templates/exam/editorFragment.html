@@ -1,37 +1,89 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="headerfiles">
-	<meta charset="UTF-8" />
-	<link th:href="@{/css/styles.css}" rel="stylesheet">
-</head>
-<body>
+  <head th:fragment="headerfiles">
+    <meta charset="UTF-8" />
+    <link th:href="@{/css/styles.css}" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Subject fragment -->
+    <div th:fragment="subject (subject)">
+      <div>Subject</div>
+      <div>
+        <table class="table">
+          <tr>
+            <td>Name</td>
+            <td
+              th:value="value = ${subject.subjectName}"
+              th:field="*{subject.subjectName}"
+            >
+              Subject Name
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
 
-	<div th:fragment="subject (subjectName)">
-		<div>
-			Subject
-		</div>
-		<div>
-			<table class="table">
-				<tr>
-					<td>
-						Name
-					</td>
-					<td th:text="#{subjectName}">
-						Subject Name
-					</td>
-				</tr>
-			</table>
-		</div>
-		
-	</div>
+    <!-- Single choice question fragment -->
+    <div th:fragment="question (question)" class="card m-2">
+      <div class="card-header">Question</div>
+      <div class="card-body">
+        <ul class="list-group input-group">
+          <li class="list-group-item form-inline">
+            <input
+              name="answer"
+              type="radio"
+              value="1"
+              class="form-control mr-2"
+            />
+            <input
+              type="text"
+              placeholder="Option 1"
+              class="form-control w-80"
+            />
+          </li>
+          <li class="list-group-item form-inline">
+            <input
+              name="answer"
+              type="radio"
+              value="2"
+              class="form-control mr-2"
+            />
+            <input
+              type="text"
+              placeholder="Option 2"
+              class="form-control w-80"
+            />
+          </li>
+          <li class="list-group-item form-inline">
+            <input
+              name="answer"
+              type="radio"
+              value="3"
+              class="form-control mr-2"
+            />
+            <input
+              type="text"
+              placeholder="Option 3"
+              class="form-control w-80"
+            />
+          </li>
+          <li class="list-group-item form-inline">
+            <input
+              name="answer"
+              type="radio"
+              value="4"
+              class="form-control mr-2"
+            />
+            <input
+              type="text"
+              placeholder="Option 4"
+              class="form-control w-80"
+            />
+          </li>
+        </ul>
+      </div>
+    </div>
 
-	<div th:fragment="question">
-		<div>
-			Question
-		</div>
-		<div>
-			Response options
-		</div>
-	</div>
-	
-</body>
+    <!-- End -->
+  </body>
+</html>
