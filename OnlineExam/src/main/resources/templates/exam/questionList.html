@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:fragment="headerfiles">
+    <meta charset="UTF-8" />
+    <link th:href="@{/css/styles.css}" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Question List fragment -->
+    <div th:fragment="questionList (questions)">
+      <th:block th:each="question : ${questions}">
+        <div
+          th:replace="exam/editorFragment :: questionSingle(${question})"
+        ></div>
+      </th:block>
+    </div>
+  </body>
+</html>

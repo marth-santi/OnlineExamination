@@ -51,8 +51,9 @@
       <div class="card-header bg-warning h4">
         <input
           type="text"
-          placeholder="Question"
+          th:placeholder="Question"
           class="form-control font-weight-bold"
+          th:field="*{question.question}"
         />
       </div>
       <div class="card-body">
@@ -64,7 +65,12 @@
                   <input name="answer" type="radio" value="1" />
                 </div>
               </div>
-              <input type="text" placeholder="Option 1" class="form-control" />
+              <input
+                type="text"
+                placeholder="Option 1"
+                class="form-control"
+                th:field="*{question.op1}"
+              />
             </div>
           </li>
           <li class="list-group-item">
@@ -74,7 +80,12 @@
                   <input name="answer" type="radio" value="2" />
                 </div>
               </div>
-              <input type="text" placeholder="Option 2" class="form-control" />
+              <input
+                type="text"
+                placeholder="Option 2"
+                class="form-control"
+                th:field="*{question.op2}"
+              />
             </div>
           </li>
           <li class="list-group-item">
@@ -84,7 +95,12 @@
                   <input name="answer" type="radio" value="3" />
                 </div>
               </div>
-              <input type="text" placeholder="Option 3" class="form-control" />
+              <input
+                type="text"
+                placeholder="Option 3"
+                class="form-control"
+                th:field="*{question.op3}"
+              />
             </div>
           </li>
           <li class="list-group-item">
@@ -94,7 +110,12 @@
                   <input name="answer" type="radio" value="4" />
                 </div>
               </div>
-              <input type="text" placeholder="Option 4" class="form-control" />
+              <input
+                type="text"
+                placeholder="Option 4"
+                class="form-control"
+                th:field="*{question.op4}"
+              />
             </div>
           </li>
         </ul>
@@ -108,6 +129,7 @@
           type="text"
           placeholder="Question"
           class="form-control font-weight-bold"
+          th:field="*{question.question}"
         />
       </div>
       <div class="card-body">
@@ -119,7 +141,12 @@
                   <input name="answer" type="checkbox" value="1" />
                 </div>
               </div>
-              <input type="text" placeholder="Option 1" class="form-control" />
+              <input
+                type="text"
+                placeholder="Option 1"
+                class="form-control"
+                th:field="*{question.op1}"
+              />
             </div>
           </li>
           <li class="list-group-item">
@@ -129,7 +156,12 @@
                   <input name="answer" type="checkbox" value="2" />
                 </div>
               </div>
-              <input type="text" placeholder="Option 2" class="form-control" />
+              <input
+                type="text"
+                placeholder="Option 2"
+                class="form-control"
+                th:field="*{question.op2}"
+              />
             </div>
           </li>
           <li class="list-group-item">
@@ -139,7 +171,12 @@
                   <input name="answer" type="checkbox" value="3" />
                 </div>
               </div>
-              <input type="text" placeholder="Option 3" class="form-control" />
+              <input
+                type="text"
+                placeholder="Option 3"
+                class="form-control"
+                th:field="*{question.op3}"
+              />
             </div>
           </li>
           <li class="list-group-item">
@@ -149,7 +186,12 @@
                   <input name="answer" type="checkbox" value="4" />
                 </div>
               </div>
-              <input type="text" placeholder="Option 4" class="form-control" />
+              <input
+                type="text"
+                placeholder="Option 4"
+                class="form-control"
+                th:field="*{question.op4}"
+              />
             </div>
           </li>
         </ul>

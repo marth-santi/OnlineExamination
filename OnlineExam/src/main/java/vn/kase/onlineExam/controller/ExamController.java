@@ -34,6 +34,16 @@ public class ExamController {
 		Subject subject = new Subject();
 		subject.setSubjectName("Math");
 		List<Question> questions = new ArrayList<Question>();
+		for (int i = 0; i < 3; i++) {
+			Question q = new Question();
+			q.setSubjectId(1);
+			q.setQuestion("cau hoi " + i);
+			q.setOp1("A");
+			q.setOp2("B");
+			q.setOp3("C");
+			q.setOp4("D");
+			questions.add(q);
+		}
 		exam.setQuestions(questions);
 		exam.setSubject(subject);
 		// End mock data

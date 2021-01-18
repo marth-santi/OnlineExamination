@@ -34,7 +34,10 @@
 
           <hr />
 
-          <div id="questionList"></div>
+          <div
+            id="questionList"
+            th:replace="exam/questionList :: questionList(${exam.questions})"
+          ></div>
           <button
             type="button"
             class="btn btn-primary m-3"
