@@ -46,14 +46,19 @@
       </div>
     </div>
 
+    <!-- TEST -->
+    <div th:fragment="ques (question)" th:object="${question}">
+      <input th:value="*{question}"></input>
+    </div>
+
     <!-- Single choice question fragment -->
-    <div th:fragment="questionSingle (question)" class="card m-2">
+    <div th:fragment="questionSingle (index, questionList, state)" class="card m-2">
       <div class="card-header bg-warning h4">
         <input
           type="text"
           th:placeholder="Question"
           class="form-control font-weight-bold"
-          th:field="*{question.question}"
+          th:field="*{questions[__${index}__].question}"
         />
       </div>
       <div class="card-body">
@@ -69,7 +74,7 @@
                 type="text"
                 placeholder="Option 1"
                 class="form-control"
-                th:field="*{question.op1}"
+                th:field="*{questions[__${index}__].op1}"
               />
             </div>
           </li>
@@ -84,7 +89,7 @@
                 type="text"
                 placeholder="Option 2"
                 class="form-control"
-                th:field="*{question.op2}"
+                th:field="*{questions[__${index}__].op2}"
               />
             </div>
           </li>
@@ -99,7 +104,7 @@
                 type="text"
                 placeholder="Option 3"
                 class="form-control"
-                th:field="*{question.op3}"
+                th:field="*{questions[__${index}__].op3}"
               />
             </div>
           </li>
@@ -114,7 +119,7 @@
                 type="text"
                 placeholder="Option 4"
                 class="form-control"
-                th:field="*{question.op4}"
+                th:field="*{questions[__${index}__].op4}"
               />
             </div>
           </li>
@@ -123,13 +128,13 @@
     </div>
 
     <!-- Multiple choice question fragment -->
-    <div th:fragment="questionMultiple (question)" class="card m-2">
+    <div th:fragment="questionMultiple (index, questionList, state)" class="card m-2">
       <div class="card-header bg-warning">
         <input
           type="text"
           placeholder="Question"
           class="form-control font-weight-bold"
-          th:field="*{question.question}"
+          th:field="*{questions[__${index}__].question}"
         />
       </div>
       <div class="card-body">
@@ -145,7 +150,7 @@
                 type="text"
                 placeholder="Option 1"
                 class="form-control"
-                th:field="*{question.op1}"
+                th:field="*{questions[__${index}__].op1}"
               />
             </div>
           </li>
@@ -160,7 +165,7 @@
                 type="text"
                 placeholder="Option 2"
                 class="form-control"
-                th:field="*{question.op2}"
+                th:field="*{questions[__${index}__].op2}"
               />
             </div>
           </li>
@@ -175,7 +180,7 @@
                 type="text"
                 placeholder="Option 3"
                 class="form-control"
-                th:field="*{question.op3}"
+                th:field="*{questions[__${index}__].op3}"
               />
             </div>
           </li>
@@ -190,7 +195,7 @@
                 type="text"
                 placeholder="Option 4"
                 class="form-control"
-                th:field="*{question.op4}"
+                th:field="*{questions[__${index}__].op4}"
               />
             </div>
           </li>

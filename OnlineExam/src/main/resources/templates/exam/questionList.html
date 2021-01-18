@@ -7,9 +7,9 @@
   <body>
     <!-- Question List fragment -->
     <div th:fragment="questionList (questions)">
-      <th:block th:each="question : ${questions}">
+      <th:block th:each="question, stat : ${questions}">
         <div
-          th:replace="exam/editorFragment :: questionSingle(${question})"
+          th:replace="exam/editorFragment :: questionSingle(${stat.index},${questions},${stat})"
         ></div>
       </th:block>
     </div>
