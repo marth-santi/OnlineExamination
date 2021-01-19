@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import vn.kase.onlineExam.model.Question;
+import vn.kase.onlineExam.model.Subject;
 
 public interface QuestionService {
 
@@ -31,6 +32,10 @@ public interface QuestionService {
 
 	Integer deleteBySubjectId(Integer id);
 
-	List<Question> findAllBySubjectId(Integer id);
+	List<Question> findAllSubjectId(Integer id);
+
+	List<Subject> findAllSubjects();
+
+	List<Question> findAllBySubjectId(Integer subjectId);
 
 }

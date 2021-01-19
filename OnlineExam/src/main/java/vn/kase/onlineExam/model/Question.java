@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.sun.istack.NotNull;
+
 import lombok.Data;
 
 @Data
@@ -51,6 +53,7 @@ public class Question implements Serializable{
 
 	public Question(Integer id, String question, String op1, String op2, String op3, String op4, String answer,
 			Integer subjectId) {
+		super();
 		this.id = id;
 		this.question = question;
 		this.op1 = op1;
@@ -61,7 +64,6 @@ public class Question implements Serializable{
 		this.subjectId = subjectId;
 	}
 	
-    
 }
 
 

@@ -10,6 +10,6 @@ import vn.kase.onlineExam.model.Question;
 @Repository
 public interface QuestionRepository extends CrudRepository<Question, Integer>{
 
-	List<Question> findAllBySubjectId(Integer id);
+	List<Question> findAllBySubjectId(Integer subjectId);
 	Integer deleteBySubjectId(Integer id);
 }

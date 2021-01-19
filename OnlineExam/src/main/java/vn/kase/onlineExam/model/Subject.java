@@ -38,15 +38,17 @@ public class Subject implements Serializable {
     @Column(name = "end_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
-
+    
 	public Subject() {
 	}
 
 	public Subject(Integer id, String subjectName, Date startDate, Date endDate) {
+		super();
 		this.id = id;
 		this.subjectName = subjectName;
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}
+	
 	
 }

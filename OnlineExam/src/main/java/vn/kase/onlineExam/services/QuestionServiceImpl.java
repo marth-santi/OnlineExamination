@@ -7,17 +7,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import vn.kase.onlineExam.model.Question;
+import vn.kase.onlineExam.model.Subject;
 import vn.kase.onlineExam.repository.QuestionRepository;
+import vn.kase.onlineExam.repository.SubjectRepository;
 
 @Service
 public class QuestionServiceImpl implements QuestionService {
 	@Autowired
 	QuestionRepository questionRepository;
+	@Autowired
+	SubjectRepository subjectRepository;
+	
+	@Override
+	public List<Subject> findAllSubjects(){
+		return (List<Subject>)subjectRepository.findAll();
+	}
+	
 
 	@Override
-	public List<Question> findAllBySubjectId(Integer id) {
-		return questionRepository.findAllBySubjectId(id);
+	public List<Question> findAllBySubjectId(Integer subjectId) {
+		return questionRepository.findAllBySubjectId(subjectId);
 	}
+
 
 	@Override
 	public Integer deleteBySubjectId(Integer id) {
@@ -78,6 +89,12 @@ public class QuestionServiceImpl implements QuestionService {
 	public void deleteAll() {
 		questionRepository.deleteAll();
 	}
-	
+
+
+	@Override
+	public List<Question> findAllSubjectId(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}	
 
 }
