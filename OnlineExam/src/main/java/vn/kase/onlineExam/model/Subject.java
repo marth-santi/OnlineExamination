@@ -38,5 +38,7 @@ public class Subject implements Serializable {
 
 	@Column(name = "end_date")
 	private Date endDate;    
-		
+	
+	@Column(name="times")
+	private Integer time;
 }

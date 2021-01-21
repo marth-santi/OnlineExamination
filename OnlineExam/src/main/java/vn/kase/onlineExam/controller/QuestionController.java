@@ -16,12 +16,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import vn.kase.onlineExam.model.Question;
 import vn.kase.onlineExam.model.Subject;
 import vn.kase.onlineExam.services.QuestionService;
+import vn.kase.onlineExam.services.SubjectService;
 
 @Controller
 @RequestMapping("/question")
 public class QuestionController {
 	@Autowired
-	private QuestionService questionService;	
+	private QuestionService questionService;
+	@Autowired
+	private SubjectService subjectService;
 	
 	@ModelAttribute("listSubjects")
 	public List<Subject> getAllSubject(){
@@ -69,6 +72,7 @@ public class QuestionController {
 	public String review(ModelMap model,@RequestParam(defaultValue = "1") Integer subjectId) {
 		List<Question> listReview = questionService.findAllBySubjectId(subjectId);
 		model.addAttribute("listReview", listReview);
+		model.addAttribute("subject", subjectService.findById(subjectId));
 		idReview = subjectId;
 		return "question/review";
 	}
