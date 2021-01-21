@@ -6,12 +6,12 @@
   </head>
   <body>
     <!-- Question List fragment -->
-    <div th:fragment="questionList (questions)">
-      <th:block th:each="question, stat : ${questions}">
+    <div id="questionList" th:fragment="questionList (questions)">
+      <div th:each="question, stat : ${questions}">
         <div
           th:replace="exam/editorFragment :: questionSingle(${stat.index},${questions},${stat})"
         ></div>
-      </th:block>
+      </div>
     </div>
   </body>
 </html>

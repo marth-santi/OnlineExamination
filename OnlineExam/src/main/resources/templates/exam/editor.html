@@ -38,6 +38,7 @@
             id="questionList"
             th:replace="exam/questionList :: questionList(${exam.questions})"
           ></div>
+
           <button
             type="button"
             class="btn btn-primary m-3"
@@ -45,11 +46,18 @@
           >
             Add new question
           </button>
+          <!-- Question list Script -->
+          <script th:inline="javascript">
+            /*<![CDATA[*/
+
+            var listQuestion = /*[[${exam.questions}]]*/ "default";
+            console.log(JSON.stringify(listQuestion));
+
+            /*]]>*/
+          </script>
+          <script src="/exam/editor.js"></script>
         </div>
       </form>
-
-      <!-- Editor Script -->
-      <script src="/exam/editor.js"></script>
     </div>
   </body>
 </html>

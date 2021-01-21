@@ -48,11 +48,14 @@
 
     <!-- TEST -->
     <div th:fragment="ques (question)" th:object="${question}">
-      <input th:value="*{question}"></input>
+      <div th:text="${question}"></div>
     </div>
 
     <!-- Single choice question fragment -->
-    <div th:fragment="questionSingle (index, questionList, state)" class="card m-2">
+    <div
+      th:fragment="questionSingle (index, questionList, state)"
+      class="card m-2"
+    >
       <div class="card-header bg-warning h4">
         <input
           type="text"
@@ -128,7 +131,10 @@
     </div>
 
     <!-- Multiple choice question fragment -->
-    <div th:fragment="questionMultiple (index, questionList, state)" class="card m-2">
+    <div
+      th:fragment="questionMultiple (index, questionList, state)"
+      class="card m-2"
+    >
       <div class="card-header bg-warning">
         <input
           type="text"
