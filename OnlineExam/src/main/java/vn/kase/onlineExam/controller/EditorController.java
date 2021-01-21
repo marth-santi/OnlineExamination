@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,32 +29,10 @@ import vn.kase.onlineExam.viewModel.Exam;
 public class EditorController {
 
 	@PostMapping("/question/add")
-	public ResponseEntity<String> addQuestion(@RequestBody List<Question> questions) {
-		ClassLoaderTemplateResolver resolver = new ClassLoaderTemplateResolver();
-        
-		resolver.setCacheable(false);
-		resolver.setPrefix("templates/");
-		resolver.setSuffix(".html");
-		resolver.setCharacterEncoding("UTF-8");
-		resolver.setTemplateMode("HTML");
-		resolver.setOrder(1);
-		resolver.setCheckExistence(true);
-
-		TemplateEngine engine = new TemplateEngine();
-		Set<ITemplateResolver> templateResolvers = new HashSet<>();
-		templateResolvers.add(resolver);
-		engine.setTemplateResolvers(templateResolvers);
-		
-		final Context ctx = new Context();
-
-		Question newQuestion = new Question();
-		newQuestion.setQuestion("New Question");
-		questions.add(newQuestion);
-		Exam exam = new Exam();
-		exam.setQuestions(questions);
-		ctx.setVariable("questions", exam.getQuestions());
-		
-		return ResponseEntity.status(HttpStatus.OK)
-			.body(engine.process("exam/questionList", new HashSet<String>(Arrays.asList("questionList")), ctx));
+	public ModelAndView addQuestion(@ModelAttribute("exam") Exam exam) {
+		exam.getQuestions().add(new Question());
+		ModelAndView mv = new ModelAndView("exam/editor");
+		mv.addObject("exam", exam);
+		return mv;
 	}
 }

@@ -6,12 +6,22 @@
   </head>
   <body>
     <!-- Question List fragment -->
-    <div id="questionList" th:fragment="questionList (questions)">
-      <div th:each="question, stat : ${questions}">
+    <form
+      id="questionList"
+      th:fragment="questionList (exam)"
+      action="#"
+      th:action="@{/editor/question/add}"
+      th:object="${exam}"
+      method="POST"
+    >
+      <div th:each="question, stat : ${exam.questions}">
         <div
           th:replace="exam/editorFragment :: questionSingle(${stat.index},${questions},${stat})"
         ></div>
       </div>
-    </div>
+      <button class="btn btn-primary m-3" onclick="addNewQuestion();">
+        Add new question
+      </button>
+    </form>
   </body>
 </html>

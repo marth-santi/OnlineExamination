@@ -10,14 +10,14 @@
   </head>
   <body>
     <div layout:fragment="content">
-      <form
-        action="#"
-        th:action="@{/exam/submitExam}"
-        th:object="${exam}"
-        method="POST"
-      >
-        <div>Exam Editor</div>
-        <div id="examTemplate">
+      <div>Exam Editor</div>
+      <div id="examTemplate">
+        <form
+          action="#"
+          th:action="@{/exam/submitExam}"
+          th:object="${exam}"
+          method="POST"
+        >
           <div
             id="subject"
             th:replace="exam/editorFragment :: subject(${exam.subject})"
@@ -36,28 +36,11 @@
 
           <div
             id="questionList"
-            th:replace="exam/questionList :: questionList(${exam.questions})"
+            th:replace="exam/questionList :: questionList(${exam})"
           ></div>
-
-          <button
-            type="button"
-            class="btn btn-primary m-3"
-            onClick="addNewQuestion();"
-          >
-            Add new question
-          </button>
-          <!-- Question list Script -->
-          <script th:inline="javascript">
-            /*<![CDATA[*/
-
-            var listQuestion = /*[[${exam.questions}]]*/ "default";
-            console.log(JSON.stringify(listQuestion));
-
-            /*]]>*/
-          </script>
-          <script src="/exam/editor.js"></script>
-        </div>
-      </form>
+        </form>
+        <script src="/exam/editor.js"></script>
+      </div>
     </div>
   </body>
 </html>
