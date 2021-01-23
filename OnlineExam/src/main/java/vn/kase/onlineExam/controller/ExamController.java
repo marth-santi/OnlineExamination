@@ -17,7 +17,7 @@ import vn.kase.onlineExam.model.Subject;
 import vn.kase.onlineExam.repository.QuestionRepository;
 import vn.kase.onlineExam.repository.SubjectRepository;
 import vn.kase.onlineExam.viewModel.Exam;
-import vn.kase.onlineExam.viewModel.ExamVM;
+import vn.kase.onlineExam.viewModel.EditorVM;
 import vn.kase.onlineExam.viewModel.QuestionVM;
 
 @RestController
@@ -30,11 +30,11 @@ public class ExamController {
 	
 	@GetMapping("/exam/editor")
 	public ModelAndView createExam() {
-		return new ModelAndView("exam/editor", "exam", new ExamVM());
+		return new ModelAndView("exam/editor", "exam", new EditorVM());
 	}
 	
 	@PostMapping("/exam/submitExam")
-	public ModelAndView submitExam(@Valid @ModelAttribute(value = "exam") ExamVM exam, BindingResult bindingResult) {
+	public ModelAndView submitExam(@Valid @ModelAttribute(value = "exam") EditorVM exam, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			return new ModelAndView("exam/editor", "exam", exam);
 		}

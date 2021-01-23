@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import vn.kase.onlineExam.viewModel.ExamVM;
+import vn.kase.onlineExam.viewModel.EditorVM;
 import vn.kase.onlineExam.viewModel.QuestionVM;
 
 @RestController
@@ -24,7 +24,7 @@ import vn.kase.onlineExam.viewModel.QuestionVM;
 public class EditorHandlingController {
 
 	@PostMapping("/question/add")
-	public ModelAndView addQuestion(@Valid @ModelAttribute("exam") ExamVM exam, BindingResult bindingResult) {
+	public ModelAndView addQuestion(@Valid @ModelAttribute("exam") EditorVM exam, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			return new ModelAndView("exam/editor", "exam", exam);
 		}

@@ -93,7 +93,6 @@ public class QuestionServiceImpl implements QuestionService {
 
 	@Override
 	public List<Question> findAllSubjectId(Integer id) {
-		// TODO Auto-generated method stub
 		return null;
 	}	
 

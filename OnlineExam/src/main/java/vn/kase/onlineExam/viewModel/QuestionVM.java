@@ -22,4 +22,15 @@ public class QuestionVM extends Question{
   private Boolean isCheckedOp3;
   private Boolean isCheckedOp4;
   private Boolean isMultiple;
+
+  public Question toQuestion() {
+    String answer = "";
+    if (this.isCheckedOp1) answer += '1';
+    if (this.isCheckedOp2) answer += '2';
+    if (this.isCheckedOp3) answer += '3';
+    if (this.isCheckedOp4) answer += '4';
+
+    this.answer = answer;
+    return (Question)this;
+  }
 }
