@@ -30,31 +30,7 @@ public class ExamController {
 	
 	@GetMapping("/exam/editor")
 	public ModelAndView createExam() {
-		ModelAndView modelView = new ModelAndView("exam/editor");
-
-		ExamVM exam = new ExamVM();
-		// Mock data
-		// Subject subject = new Subject();
-		// subject.setSubjectName("Math");
-		// List<QuestionVM> questions = new ArrayList<QuestionVM>();
-		// for (int i = 0; i < 2; i++) {
-		// 	QuestionVM q = new QuestionVM();
-		// 	q.setSubjectId(1)
-		// 			.setQuestion("cau hoi " + i)
-		// 			.setOp1("A")
-		// 			.setOp2("B")
-		// 			.setOp3("C")
-		// 			.setOp4("D");
-		// 	q.setIsCheckedOp1(true);
-		// 	q.setIsMultiple(false);
-		// 	questions.add(q);
-		// }
-		// exam.setQuestions(questions);
-		// exam.setSubject(subject);
-		// End mock data
-
-		modelView.addObject("exam", exam);
-		return modelView;
+		return new ModelAndView("exam/editor", "exam", new ExamVM());
 	}
 	
 	@PostMapping("/exam/submitExam")
