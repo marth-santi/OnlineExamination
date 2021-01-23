@@ -1,0 +1,1 @@
+ALTER TABLE `tb_marks` CHANGE COLUMN `test_date` `test_date` DATE NULL DEFAULT NULL ;
