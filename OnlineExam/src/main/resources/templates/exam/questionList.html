@@ -24,17 +24,107 @@
           ></div
         ></th:block>
       </div>
-      <button class="btn btn-primary m-3" onclick="addNewQuestion();">
-        Add new question
-      </button>
     </div>
 
+    <!-- Delete Question Modal-->
+    <div
+      class="modal fade"
+      id="deleteQuestionModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="newQuestionModal"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Delete Question Confirm</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <button
+              type="button"
+              class="btn btn-outline-primary mr-3"
+              onclick="addNewQuestion(true);"
+            >
+              Multiple Choice Question
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-info mr-3"
+              onclick="addNewQuestion(false);"
+            >
+              Single Choice Question
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Add new Question -->
     <div th:fragment="addQuestion (exam)">
-      <button class="btn btn-primary m-3" onclick="addQuestion();">
-        Add question
+      <input
+        id="isMultiple"
+        type="hidden"
+        th:field="*{isMultipleChoiceNewQuestion}"
+      />
+      <!-- Button trigger Add question modal -->
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-toggle="modal"
+        data-target="#newQuestionModal"
+      >
+        Add Question
       </button>
-      <div></div>
+
+      <!-- Add question Modal -->
+      <div
+        class="modal fade"
+        id="newQuestionModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="newQuestionModal"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Select Question Type</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <button
+                type="button"
+                class="btn btn-outline-primary mr-3"
+                onclick="addNewQuestion(true);"
+              >
+                Multiple Choice Question
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-info mr-3"
+                onclick="addNewQuestion(false);"
+              >
+                Single Choice Question
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>

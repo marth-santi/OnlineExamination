@@ -28,10 +28,13 @@ public class EditorHandlingController {
 		if (bindingResult.hasErrors()) {
 			return new ModelAndView("exam/editor", "exam", exam);
 		}
-		
+
+		if (exam.getQuestions() == null) {
+			exam.setQuestions(new ArrayList<QuestionVM>());
+		}
 		exam.getQuestions().add(
-				(new QuestionVM()).setIsMultiple(true)
-			);
+				(new QuestionVM()).setIsMultiple(exam.getIsMultipleChoiceNewQuestion())
+		);
 		return new ModelAndView("exam/editor", "exam", exam);
 	}
 }

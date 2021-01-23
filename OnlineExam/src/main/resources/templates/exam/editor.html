@@ -39,6 +39,10 @@
             id="questionList"
             th:replace="exam/questionList :: questionList(${exam})"
           ></div>
+          <div
+            id="questionList"
+            th:replace="exam/questionList :: addQuestion(${exam})"
+          ></div>
         </form>
         <script src="/exam/editor.js"></script>
       </div>

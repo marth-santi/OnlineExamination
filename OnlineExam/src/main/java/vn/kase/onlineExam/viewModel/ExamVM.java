@@ -14,4 +14,5 @@ public class ExamVM implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Subject subject;
 	private List<QuestionVM> questions;
+	private Boolean isMultipleChoiceNewQuestion;
 }
