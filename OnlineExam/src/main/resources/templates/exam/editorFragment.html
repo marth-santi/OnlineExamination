@@ -99,6 +99,7 @@
                     type="radio"
                     value="1"
                     th:field="*{questions[__${index}__].answer}"
+                    th:checked="*{questions[__${index}__].isCheckedOp1}"
                   />
                 </div>
               </div>
@@ -118,6 +119,7 @@
                     type="radio"
                     value="2"
                     th:field="*{questions[__${index}__].answer}"
+                    th:checked="*{questions[__${index}__].isCheckedOp2}"
                   />
                 </div>
               </div>
@@ -137,6 +139,7 @@
                     type="radio"
                     value="3"
                     th:field="*{questions[__${index}__].answer}"
+                    th:checked="*{questions[__${index}__].isCheckedOp3}"
                   />
                 </div>
               </div>
@@ -156,6 +159,7 @@
                     type="radio"
                     value="4"
                     th:field="*{questions[__${index}__].answer}"
+                    th:checked="*{questions[__${index}__].isCheckedOp4}"
                   />
                 </div>
               </div>

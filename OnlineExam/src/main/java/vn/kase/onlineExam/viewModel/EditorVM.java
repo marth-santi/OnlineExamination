@@ -34,11 +34,9 @@ public class EditorVM implements Serializable{
 	
 	public EditorVM(Exam exam){
 		this.setSubject(exam.getSubject());
-		if (this.questions == null)
-			this.questions = new ArrayList<QuestionVM>();
 			
 		for (Question q : exam.getQuestions()) {
-			this.getQuestions().add(new QuestionVM(q));
+			this.questions.add(new QuestionVM(q));
 		}
 	}
 }

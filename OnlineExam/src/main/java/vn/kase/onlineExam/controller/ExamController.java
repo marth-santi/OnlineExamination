@@ -31,8 +31,8 @@ public class ExamController {
 			return new ModelAndView("exam/editor", "exam", editorVM);
 		}
 		
-		System.out.println(editorVM.toString());
 		Exam savedExam = examService.saveExam(editorVM.toExam());
+		System.out.println(new EditorVM(savedExam));
 		return new ModelAndView("exam/editor", "exam", new EditorVM(savedExam));
 	}
 		

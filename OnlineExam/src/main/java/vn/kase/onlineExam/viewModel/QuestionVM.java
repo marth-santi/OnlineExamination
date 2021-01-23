@@ -24,30 +24,31 @@ public class QuestionVM extends Question{
   private Boolean isMultiple;
 
   public Question toQuestion() {
-    String answer = "";
+    String tempAnswer = "";
     if (this.isCheckedOp1)
-      answer += '1';
+      tempAnswer += '1';
     if (this.isCheckedOp2)
-      answer += '2';
+      tempAnswer += '2';
     if (this.isCheckedOp3)
-      answer += '3';
+      tempAnswer += '3';
     if (this.isCheckedOp4)
-      answer += '4';
+      tempAnswer += '4';
 
-    this.answer = answer;
+    if (this.answer.isBlank())
+      this.answer = tempAnswer;
     return new Question(id, question, op1, op2, op3, op4, answer, subjectId);
   }
   
   public QuestionVM(Question q) {
     super(q.getId(), q.getQuestion(), q.getOp1(), q.getOp2(), q.getOp3(), q.getOp4(), q.getAnswer(), q.getSubjectId());
 
-    if (answer.contains("1"))
-      isCheckedOp1 = true;
-    if (answer.contains("2"))
-      isCheckedOp2 = true;
-    if (answer.contains("3"))
-      isCheckedOp3 = true;
-    if (answer.contains("4"))
-      isCheckedOp4 = true;
+    if (q.getAnswer().contains("1"))
+      this.isCheckedOp1 = true;
+    if (q.getAnswer().contains("2"))
+      this.isCheckedOp2 = true;
+    if (q.getAnswer().contains("3"))
+      this.isCheckedOp3 = true;
+    if (q.getAnswer().contains("4"))
+      this.isCheckedOp4 = true;
   }
 }
