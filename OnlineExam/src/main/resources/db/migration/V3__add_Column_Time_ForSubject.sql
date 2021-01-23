@@ -1,0 +1,1 @@
+alter table tb_subject add column times int;
