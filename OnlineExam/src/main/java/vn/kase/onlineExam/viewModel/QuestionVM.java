@@ -34,7 +34,7 @@ public class QuestionVM extends Question{
     if (this.isCheckedOp4)
       tempAnswer += '4';
 
-    if (this.answer.isBlank())
+    if (this.answer == null || this.answer.isBlank())
       this.answer = tempAnswer;
     return new Question(id, question, op1, op2, op3, op4, answer, subjectId);
   }

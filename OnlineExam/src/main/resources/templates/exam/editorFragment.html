@@ -5,8 +5,12 @@
     <link th:href="@{/css/styles.css}" rel="stylesheet" />
   </head>
   <body>
+    <!-- :::: ======= =================================== -->
     <!-- Subject fragment -->
-    <div th:fragment="subject (subject)" class="card m-2 border border-primary">
+    <div
+      th:fragment="subject (subject)"
+      class="card m-2 border border-primary shadow"
+    >
       <div class="card-header p-2 bg-info text-white h3 font-weight-bold">
         Subject
       </div>
@@ -70,39 +74,94 @@
         </div>
       </div>
     </div>
+    <!-- :::: ======= =================================== -->
 
     <!-- TEST -->
     <div th:fragment="ques (question)" th:object="${question}">
       <div th:text="${question}"></div>
     </div>
 
+    <!-- :::: ======= =================================== -->
     <!-- Single choice question fragment -->
     <div
       th:fragment="questionSingle (index, questionList, state)"
-      class="card m-2"
+      class="card m-2 shadow border border-warning"
     >
+      <!-- Delete Question Modal-->
+      <div
+        class="modal fade"
+        id="deleteQuestionModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="newQuestionModal"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Delete Question Confirm</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-footer d-flex">
+              <button
+                type="button"
+                class="btn btn-outline-danger"
+                onclick="deleteQuestion(id);"
+              >
+                Confirm
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Delete Modal -->
       <input type="hidden" th:field="*{questions[__${index}__].id}" />
       <input type="hidden" th:field="*{questions[__${index}__].isMultiple}" />
-      <div class="card-header bg-warning h4">
+      <div class="card-header bg-warning bg-gradient h4 d-flex">
         <input
           type="text"
           th:placeholder="Question"
-          class="form-control font-weight-bold"
+          class="form-control font-weight-bold flex-grow-1"
           th:field="*{questions[__${index}__].question}"
         />
+        <button
+          type="button"
+          class="btn-close bg-danger p-2 ms-2"
+          data-bs-toggle="modal"
+          data-bs-target="#deleteQuestionModal"
+        ></button>
       </div>
       <div class="card-body">
         <ul class="list-group">
           <li class="list-group-item">
             <div class="input-group">
               <div class="input-group-prepend">
-                <div class="input-group-text">
+                <div class="btn-group" role="group">
                   <input
                     type="radio"
                     value="1"
+                    th:id="'question' + ${index} + 'answer1'"
                     th:field="*{questions[__${index}__].answer}"
                     th:checked="*{questions[__${index}__].isCheckedOp1}"
+                    class="btn-check"
                   />
+                  <label
+                    class="btn btn-outline-primary"
+                    th:for="'question' + ${index} + 'answer1'"
+                    >Answer 1</label
+                  >
                 </div>
               </div>
               <input
@@ -116,13 +175,20 @@
           <li class="list-group-item">
             <div class="input-group">
               <div class="input-group-prepend">
-                <div class="input-group-text">
+                <div class="btn-group" role="group">
                   <input
                     type="radio"
                     value="2"
+                    th:id="'question' + ${index} + 'answer2'"
                     th:field="*{questions[__${index}__].answer}"
                     th:checked="*{questions[__${index}__].isCheckedOp2}"
+                    class="btn-check"
                   />
+                  <label
+                    class="btn btn-outline-primary"
+                    th:for="'question' + ${index} + 'answer2'"
+                    >Answer 2</label
+                  >
                 </div>
               </div>
               <input
@@ -136,13 +202,20 @@
           <li class="list-group-item">
             <div class="input-group">
               <div class="input-group-prepend">
-                <div class="input-group-text">
+                <div class="btn-group" role="group">
                   <input
                     type="radio"
                     value="3"
+                    th:id="'question' + ${index} + 'answer3'"
                     th:field="*{questions[__${index}__].answer}"
                     th:checked="*{questions[__${index}__].isCheckedOp3}"
+                    class="btn-check"
                   />
+                  <label
+                    class="btn btn-outline-primary"
+                    th:for="'question' + ${index} + 'answer3'"
+                    >Answer 3</label
+                  >
                 </div>
               </div>
               <input
@@ -156,13 +229,20 @@
           <li class="list-group-item">
             <div class="input-group">
               <div class="input-group-prepend">
-                <div class="input-group-text">
+                <div class="btn-group" role="group">
                   <input
                     type="radio"
                     value="4"
+                    th:id="'question' + ${index} + 'answer4'"
                     th:field="*{questions[__${index}__].answer}"
                     th:checked="*{questions[__${index}__].isCheckedOp4}"
+                    class="btn-check"
                   />
+                  <label
+                    class="btn btn-outline-primary"
+                    th:for="'question' + ${index} + 'answer4'"
+                    >Answer 4</label
+                  >
                 </div>
               </div>
               <input
@@ -176,34 +256,87 @@
         </ul>
       </div>
     </div>
+    <!-- :::: ======= =================================== -->
 
+    <!-- :::: ======= =================================== -->
     <!-- Multiple choice question fragment -->
     <div
       th:fragment="questionMultiple (index, questionList, state)"
-      class="card m-2"
+      class="card m-2 shadow border border-warning"
     >
+      <!-- Delete Question Modal-->
+      <div
+        class="modal fade"
+        id="deleteQuestionModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="newQuestionModal"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Delete Question Confirm</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-footer d-flex">
+              <button
+                type="button"
+                class="btn btn-outline-danger"
+                onclick="deleteQuestion(id);"
+              >
+                Confirm
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
       <input type="hidden" th:field="*{questions[__${index}__].id}" />
       <input type="hidden" th:field="*{questions[__${index}__].isMultiple}" />
-      <div class="card-header bg-warning">
+      <div class="card-header bg-warning bg-gradient h4 d-flex">
         <input
           type="text"
           placeholder="Question"
-          class="form-control font-weight-bold"
+          class="form-control font-weight-bold flex-grow-1"
           th:field="*{questions[__${index}__].question}"
         />
+        <button
+          type="button"
+          class="btn-close bg-danger p-2 ms-2"
+          data-bs-toggle="modal"
+          data-bs-target="#deleteQuestionModal"
+        ></button>
       </div>
       <div class="card-body">
         <ul class="list-group">
           <li class="list-group-item">
             <div class="input-group">
               <div class="input-group-prepend">
-                <div class="input-group-text">
+                <div class="btn-group" role="group">
                   <input
                     name="answer"
                     type="checkbox"
+                    th:id="'question' + ${index} + 'answer1'"
                     th:field="*{questions[__${index}__].isCheckedOp1}"
                     th:value="*{questions[__${index}__].isCheckedOp1}"
                   />
+                  <label
+                    class="btn btn-outline-primary"
+                    th:for="'question' + ${index} + 'answer1'"
+                    >Answer 1</label
+                  >
                 </div>
               </div>
               <input
@@ -217,13 +350,19 @@
           <li class="list-group-item">
             <div class="input-group">
               <div class="input-group-prepend">
-                <div class="input-group-text">
+                <div class="btn-group" role="group">
                   <input
                     name="answer"
                     type="checkbox"
+                    th:id="'question' + ${index} + 'answer2'"
                     th:field="*{questions[__${index}__].isCheckedOp2}"
                     th:value="*{questions[__${index}__].isCheckedOp2}"
                   />
+                  <label
+                    class="btn btn-outline-primary"
+                    th:for="'question' + ${index} + 'answer2'"
+                    >Answer 2</label
+                  >
                 </div>
               </div>
               <input
@@ -237,13 +376,19 @@
           <li class="list-group-item">
             <div class="input-group">
               <div class="input-group-prepend">
-                <div class="input-group-text">
+                <div class="btn-group" role="group">
                   <input
                     name="answer"
                     type="checkbox"
+                    th:id="'question' + ${index} + 'answer3'"
                     th:field="*{questions[__${index}__].isCheckedOp3}"
                     th:value="*{questions[__${index}__].isCheckedOp3}"
                   />
+                  <label
+                    class="btn btn-outline-primary"
+                    th:for="'question' + ${index} + 'answer3'"
+                    >Answer 3</label
+                  >
                 </div>
               </div>
               <input
@@ -257,13 +402,19 @@
           <li class="list-group-item">
             <div class="input-group">
               <div class="input-group-prepend">
-                <div class="input-group-text">
+                <div class="btn-group" role="group">
                   <input
                     name="answer"
                     type="checkbox"
+                    th:id="'question' + ${index} + 'answer4'"
                     th:field="*{questions[__${index}__].isCheckedOp4}"
                     th:value="*{questions[__${index}__].isCheckedOp4}"
                   />
+                  <label
+                    class="btn btn-outline-primary"
+                    th:for="'question' + ${index} + 'answer4'"
+                    >Answer 4</label
+                  >
                 </div>
               </div>
               <input
@@ -277,6 +428,7 @@
         </ul>
       </div>
     </div>
+    <!-- :::: ======= =================================== -->
 
     <!-- End -->
   </body>
