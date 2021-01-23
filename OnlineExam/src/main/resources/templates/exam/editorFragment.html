@@ -12,6 +12,7 @@
       </div>
       <div class="card-body p-2">
         <div class="input-group">
+          <!-- Subject Name -->
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text">Subject Name</span>
@@ -22,6 +23,14 @@
               th:field="*{subject.subjectName}"
             />
           </div>
+          <div
+            th:if="${#fields.hasErrors('subject.subjectName')}"
+            th:error="*{subject.subjectName}"
+            class="alert alert-danger"
+          >
+            Subject Name cannot be empty
+          </div>
+          <!-- Start Date -->
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text">Start Date</span>
@@ -32,6 +41,14 @@
               th:field="*{subject.startDate}"
             />
           </div>
+          <div
+            th:if="${#fields.hasErrors('subject.startDate')}"
+            th:error="*{subject.startDate}"
+            class="alert alert-danger"
+          >
+            Start date cannot be empty
+          </div>
+          <!-- End Date -->
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text">End Date</span>
@@ -41,6 +58,13 @@
               class="form-control"
               th:field="*{subject.endDate}"
             />
+          </div>
+          <div
+            th:if="${#fields.hasErrors('subject.endDate')}"
+            th:error="*{subject.endDate}"
+            class="alert alert-danger"
+          >
+            End date cannot be empty
           </div>
         </div>
       </div>
@@ -56,6 +80,7 @@
       th:fragment="questionSingle (index, questionList, state)"
       class="card m-2"
     >
+      <input type="hidden" th:field="*{questions[__${index}__].isMultiple}" />
       <div class="card-header bg-warning h4">
         <input
           type="text"
@@ -70,7 +95,11 @@
             <div class="input-group">
               <div class="input-group-prepend">
                 <div class="input-group-text">
-                  <input name="answer" type="radio" value="1" />
+                  <input
+                    type="radio"
+                    value="1"
+                    th:field="*{questions[__${index}__].answer}"
+                  />
                 </div>
               </div>
               <input
@@ -85,7 +114,11 @@
             <div class="input-group">
               <div class="input-group-prepend">
                 <div class="input-group-text">
-                  <input name="answer" type="radio" value="2" />
+                  <input
+                    type="radio"
+                    value="2"
+                    th:field="*{questions[__${index}__].answer}"
+                  />
                 </div>
               </div>
               <input
@@ -100,7 +133,11 @@
             <div class="input-group">
               <div class="input-group-prepend">
                 <div class="input-group-text">
-                  <input name="answer" type="radio" value="3" />
+                  <input
+                    type="radio"
+                    value="3"
+                    th:field="*{questions[__${index}__].answer}"
+                  />
                 </div>
               </div>
               <input
@@ -115,7 +152,11 @@
             <div class="input-group">
               <div class="input-group-prepend">
                 <div class="input-group-text">
-                  <input name="answer" type="radio" value="4" />
+                  <input
+                    type="radio"
+                    value="4"
+                    th:field="*{questions[__${index}__].answer}"
+                  />
                 </div>
               </div>
               <input
@@ -135,6 +176,7 @@
       th:fragment="questionMultiple (index, questionList, state)"
       class="card m-2"
     >
+      <input type="hidden" th:field="*{questions[__${index}__].isMultiple}" />
       <div class="card-header bg-warning">
         <input
           type="text"
@@ -149,7 +191,12 @@
             <div class="input-group">
               <div class="input-group-prepend">
                 <div class="input-group-text">
-                  <input name="answer" type="checkbox" value="1" />
+                  <input
+                    name="answer"
+                    type="checkbox"
+                    th:field="*{questions[__${index}__].isCheckedOp1}"
+                    th:value="*{questions[__${index}__].isCheckedOp1}"
+                  />
                 </div>
               </div>
               <input
@@ -164,7 +211,12 @@
             <div class="input-group">
               <div class="input-group-prepend">
                 <div class="input-group-text">
-                  <input name="answer" type="checkbox" value="2" />
+                  <input
+                    name="answer"
+                    type="checkbox"
+                    th:field="*{questions[__${index}__].isCheckedOp2}"
+                    th:value="*{questions[__${index}__].isCheckedOp2}"
+                  />
                 </div>
               </div>
               <input
@@ -179,7 +231,12 @@
             <div class="input-group">
               <div class="input-group-prepend">
                 <div class="input-group-text">
-                  <input name="answer" type="checkbox" value="3" />
+                  <input
+                    name="answer"
+                    type="checkbox"
+                    th:field="*{questions[__${index}__].isCheckedOp3}"
+                    th:value="*{questions[__${index}__].isCheckedOp3}"
+                  />
                 </div>
               </div>
               <input
@@ -194,7 +251,12 @@
             <div class="input-group">
               <div class="input-group-prepend">
                 <div class="input-group-text">
-                  <input name="answer" type="checkbox" value="4" />
+                  <input
+                    name="answer"
+                    type="checkbox"
+                    th:field="*{questions[__${index}__].isCheckedOp4}"
+                    th:value="*{questions[__${index}__].isCheckedOp4}"
+                  />
                 </div>
               </div>
               <input

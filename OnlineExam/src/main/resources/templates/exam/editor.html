@@ -11,8 +11,9 @@
   <body>
     <div layout:fragment="content">
       <div>Exam Editor</div>
-      <div id="examTemplate">
+      <div>
         <form
+          id="examTemplate"
           action="#"
           th:action="@{/exam/submitExam}"
           th:object="${exam}"

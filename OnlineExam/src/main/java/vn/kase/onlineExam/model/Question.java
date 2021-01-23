@@ -12,10 +12,12 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Accessors(chain = true)
 @Entity
 @Table(name = "tb_questions")
 public class Question implements Serializable{
@@ -27,28 +29,28 @@ public class Question implements Serializable{
 	@Id
     @Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    protected Integer id;
 
     @Column(name = "question")
-    private String question;
+    protected String question;
 
     @Column(name = "op1")
-    private String op1;
+    protected String op1;
 
     @Column(name = "op2")
-    private String op2;
+    protected String op2;
 
     @Column(name = "op3")
-    private String op3;
+    protected String op3;
 
     @Column(name = "op4")
-    private String op4;
+    protected String op4;
 
     @Column(name = "answer")
-    private String answer;
+    protected String answer;
     
     @Column(name = "subject_id")
-    private Integer subjectId;
+    protected Integer subjectId;
 }
 
 

@@ -1,4 +1,6 @@
 console.log($("#questionList").serialize());
 function addNewQuestion() {
-  $("#questionList").submit();
+  $("#examTemplate")
+    .attr("action", CURRENT_URL + ROUTE.addQuestion)
+    .submit();
 }
