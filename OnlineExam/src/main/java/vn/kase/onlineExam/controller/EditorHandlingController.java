@@ -23,9 +23,16 @@ public class EditorHandlingController {
 			return new ModelAndView("exam/editor", "exam", editorVM);
 		}
 
-		editorVM.getQuestions().add(
-				(new QuestionVM()).setIsMultiple(editorVM.getIsMultipleChoiceNewQuestion())
-		);
+		editorVM.getQuestions().add((new QuestionVM()).setIsMultiple(editorVM.getIsMultipleChoiceNewQuestion()));
 		return new ModelAndView("exam/editor", "exam", editorVM);
+	}
+	
+	@PostMapping("/question/delete")
+	public String deleteQuestion(@Valid @ModelAttribute("exam") EditorVM editorVM, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return bindingResult.getAllErrors().toString();
+		}
+
+		return editorVM.getDeleteQuestionId().toString();
 	}
 }

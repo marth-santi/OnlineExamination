@@ -21,6 +21,7 @@ public class EditorVM implements Serializable{
 	private Subject subject;
 	private List<QuestionVM> questions = new ArrayList<QuestionVM>();
 	private Boolean isMultipleChoiceNewQuestion;
+	private Integer deleteQuestionId;
 
 	public Exam toExam() {
 		Exam exam = new Exam().setSubject(this.subject);

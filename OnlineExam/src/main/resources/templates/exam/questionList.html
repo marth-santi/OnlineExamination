@@ -11,6 +11,7 @@
       th:fragment="questionList (exam)"
       th:object="${exam}"
     >
+      <input type="hidden" id="deleteId" th:field="*{deleteQuestionId}" />
       <div th:each="question, stat : ${exam.questions}">
         <th:block th:if="${question.isMultiple}"
           ><div
@@ -25,6 +26,49 @@
         ></th:block>
       </div>
     </div>
+
+    <!-- Delete Question Modal-->
+    <div th:fragment="deleteQuestion">
+      <div
+        class="modal fade"
+        id="deleteQuestionModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="newQuestionModal"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Delete Question Confirm</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-footer d-flex">
+              <button
+                type="button"
+                class="btn btn-outline-danger"
+                onclick="deleteQuestion();"
+              >
+                Confirm
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Delete Modal -->
 
     <!-- Add new Question -->
     <div th:fragment="addQuestion (exam)">

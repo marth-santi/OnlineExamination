@@ -76,57 +76,12 @@
     </div>
     <!-- :::: ======= =================================== -->
 
-    <!-- TEST -->
-    <div th:fragment="ques (question)" th:object="${question}">
-      <div th:text="${question}"></div>
-    </div>
-
     <!-- :::: ======= =================================== -->
     <!-- Single choice question fragment -->
     <div
       th:fragment="questionSingle (index, questionList, state)"
       class="card m-2 shadow border border-warning"
     >
-      <!-- Delete Question Modal-->
-      <div
-        class="modal fade"
-        id="deleteQuestionModal"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="newQuestionModal"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Delete Question Confirm</h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-footer d-flex">
-              <button
-                type="button"
-                class="btn btn-outline-danger"
-                onclick="deleteQuestion(id);"
-              >
-                Confirm
-              </button>
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- End Delete Modal -->
       <input type="hidden" th:field="*{questions[__${index}__].id}" />
       <input type="hidden" th:field="*{questions[__${index}__].isMultiple}" />
       <div class="card-header bg-warning bg-gradient h4 d-flex">
@@ -141,6 +96,7 @@
           class="btn-close bg-danger p-2 ms-2"
           data-bs-toggle="modal"
           data-bs-target="#deleteQuestionModal"
+          th:onclick="'setDeleteId(' + ${index} + ');'"
         ></button>
       </div>
       <div class="card-body">
@@ -265,7 +221,7 @@
       class="card m-2 shadow border border-warning"
     >
       <!-- Delete Question Modal-->
-      <div
+      <!-- <div
         class="modal fade"
         id="deleteQuestionModal"
         tabindex="-1"
@@ -288,7 +244,7 @@
               <button
                 type="button"
                 class="btn btn-outline-danger"
-                onclick="deleteQuestion(id);"
+                th:onclick="'deleteQuestion(' + ${index} + ');'"
               >
                 Confirm
               </button>
@@ -302,7 +258,8 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
+      <!-- End Delete Modal -->
       <input type="hidden" th:field="*{questions[__${index}__].id}" />
       <input type="hidden" th:field="*{questions[__${index}__].isMultiple}" />
       <div class="card-header bg-warning bg-gradient h4 d-flex">
@@ -317,6 +274,7 @@
           class="btn-close bg-danger p-2 ms-2"
           data-bs-toggle="modal"
           data-bs-target="#deleteQuestionModal"
+          th:onclick="'setDeleteId(' + ${index} + ');'"
         ></button>
       </div>
       <div class="card-body">
@@ -324,13 +282,15 @@
           <li class="list-group-item">
             <div class="input-group">
               <div class="input-group-prepend">
-                <div class="btn-group" role="group">
+                <div class="form-check form-switch" role="group">
                   <input
                     name="answer"
                     type="checkbox"
                     th:id="'question' + ${index} + 'answer1'"
                     th:field="*{questions[__${index}__].isCheckedOp1}"
                     th:value="*{questions[__${index}__].isCheckedOp1}"
+                    class="form-check-input me-2"
+                    autocomplete="off"
                   />
                   <label
                     class="btn btn-outline-primary"
@@ -350,13 +310,15 @@
           <li class="list-group-item">
             <div class="input-group">
               <div class="input-group-prepend">
-                <div class="btn-group" role="group">
+                <div class="form-check form-switch" role="group">
                   <input
                     name="answer"
                     type="checkbox"
                     th:id="'question' + ${index} + 'answer2'"
                     th:field="*{questions[__${index}__].isCheckedOp2}"
                     th:value="*{questions[__${index}__].isCheckedOp2}"
+                    class="form-check-input me-2"
+                    autocomplete="off"
                   />
                   <label
                     class="btn btn-outline-primary"
@@ -376,13 +338,15 @@
           <li class="list-group-item">
             <div class="input-group">
               <div class="input-group-prepend">
-                <div class="btn-group" role="group">
+                <div class="form-check form-switch" role="group">
                   <input
                     name="answer"
                     type="checkbox"
                     th:id="'question' + ${index} + 'answer3'"
                     th:field="*{questions[__${index}__].isCheckedOp3}"
                     th:value="*{questions[__${index}__].isCheckedOp3}"
+                    class="form-check-input me-2"
+                    autocomplete="off"
                   />
                   <label
                     class="btn btn-outline-primary"
@@ -402,13 +366,15 @@
           <li class="list-group-item">
             <div class="input-group">
               <div class="input-group-prepend">
-                <div class="btn-group" role="group">
+                <div class="form-check form-switch" role="group">
                   <input
                     name="answer"
                     type="checkbox"
                     th:id="'question' + ${index} + 'answer4'"
                     th:field="*{questions[__${index}__].isCheckedOp4}"
                     th:value="*{questions[__${index}__].isCheckedOp4}"
+                    class="form-check-input me-2"
+                    autocomplete="off"
                   />
                   <label
                     class="btn btn-outline-primary"

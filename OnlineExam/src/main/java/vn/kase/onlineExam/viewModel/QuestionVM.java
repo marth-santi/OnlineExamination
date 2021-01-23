@@ -21,7 +21,7 @@ public class QuestionVM extends Question{
   private Boolean isCheckedOp2 = false;
   private Boolean isCheckedOp3 = false;
   private Boolean isCheckedOp4 = false;
-  private Boolean isMultiple;
+  private Boolean isMultiple = false;
 
   public Question toQuestion() {
     String tempAnswer = "";
@@ -36,6 +36,7 @@ public class QuestionVM extends Question{
 
     if (this.answer == null || this.answer.isBlank())
       this.answer = tempAnswer;
+
     return new Question(id, question, op1, op2, op3, op4, answer, subjectId);
   }
   
@@ -50,5 +51,9 @@ public class QuestionVM extends Question{
       this.isCheckedOp3 = true;
     if (q.getAnswer().contains("4"))
       this.isCheckedOp4 = true;
+    
+    
+    if (this.answer.length() > 1)
+      this.isMultiple = true;
   }
 }
