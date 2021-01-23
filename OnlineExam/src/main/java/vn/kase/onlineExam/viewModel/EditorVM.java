@@ -4,27 +4,41 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import vn.kase.onlineExam.model.Question;
 import vn.kase.onlineExam.model.Subject;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class EditorVM implements Serializable{
   /**
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private Subject subject;
-	private List<QuestionVM> questions;
+	private List<QuestionVM> questions = new ArrayList<QuestionVM>();
 	private Boolean isMultipleChoiceNewQuestion;
 
-	private Exam toExam() {
-		Exam exam = new Exam()
-			.setSubject(this.subject);
-		exam.setQuestions(new ArrayList<Question>());
+	public Exam toExam() {
+		Exam exam = new Exam().setSubject(this.subject);
+		List<Question> examQuestions = new ArrayList<Question>();
 		for (QuestionVM q : this.questions) {
-			exam.getQuestions().add(q.toQuestion());
+			examQuestions.add(q.toQuestion());
 		}
+		exam.setQuestions(examQuestions);
 		return exam;
+	}
+	
+	public EditorVM(Exam exam){
+		this.setSubject(exam.getSubject());
+		if (this.questions == null)
+			this.questions = new ArrayList<QuestionVM>();
+			
+		for (Question q : exam.getQuestions()) {
+			this.getQuestions().add(new QuestionVM(q));
+		}
 	}
 }

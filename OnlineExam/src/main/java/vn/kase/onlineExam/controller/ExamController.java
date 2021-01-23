@@ -1,8 +1,5 @@
 package vn.kase.onlineExam.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,20 +10,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import vn.kase.onlineExam.model.Subject;
-import vn.kase.onlineExam.repository.QuestionRepository;
-import vn.kase.onlineExam.repository.SubjectRepository;
-import vn.kase.onlineExam.viewModel.Exam;
+import vn.kase.onlineExam.services.ExamService;
 import vn.kase.onlineExam.viewModel.EditorVM;
-import vn.kase.onlineExam.viewModel.QuestionVM;
+import vn.kase.onlineExam.viewModel.Exam;
 
 @RestController
 public class ExamController {
 	
 	@Autowired
-	private QuestionRepository questionRepo;
-	@Autowired
-	private SubjectRepository subjectRepo;
+	private ExamService examService;
 	
 	@GetMapping("/exam/editor")
 	public ModelAndView createExam() {
@@ -34,13 +26,14 @@ public class ExamController {
 	}
 	
 	@PostMapping("/exam/submitExam")
-	public ModelAndView submitExam(@Valid @ModelAttribute(value = "exam") EditorVM exam, BindingResult bindingResult) {
+	public ModelAndView submitExam(@Valid @ModelAttribute(value = "exam") EditorVM editorVM, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
-			return new ModelAndView("exam/editor", "exam", exam);
+			return new ModelAndView("exam/editor", "exam", editorVM);
 		}
 		
-		System.out.println(exam.toString());
-		return new ModelAndView("exam/editor", "exam", exam);
+		System.out.println(editorVM.toString());
+		Exam savedExam = examService.saveExam(editorVM.toExam());
+		return new ModelAndView("exam/editor", "exam", new EditorVM(savedExam));
 	}
 		
 }

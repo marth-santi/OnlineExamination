@@ -41,11 +41,10 @@ public class ExamService {
 		}
 		List<Question> savedQuestions = (List<Question>) questionRepo.saveAll(examPlan.getQuestions());
 		
-		Exam savedExam = new Exam();
-		savedExam.setQuestions(savedQuestions);
-		savedExam.setSubject(savedSubject);
+		examPlan.setQuestions(savedQuestions);
+		examPlan.setSubject(savedSubject);
 		
-		return savedExam;
+		return examPlan;
 	}
 	
 	@Transactional
