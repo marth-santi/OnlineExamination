@@ -34,7 +34,6 @@ public class Subject implements Serializable {
   private Integer id;
 
 	@Column(name = "subject_name")
-	@NotNull
 	@NotBlank(message= "Subject name cannot be null !!!")
 	private String subjectName;
 

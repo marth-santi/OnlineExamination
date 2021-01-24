@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +20,9 @@ public class EditorVM implements Serializable{
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
+	@Valid
 	private Subject subject;
+	@Valid
 	private List<QuestionVM> questions = new ArrayList<QuestionVM>();
 	private Boolean isMultipleChoiceNewQuestion;
 	private Integer deleteQuestionId;

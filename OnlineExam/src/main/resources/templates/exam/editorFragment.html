@@ -30,7 +30,7 @@
           </div>
           <div
             th:if="${#fields.hasErrors('subject.subjectName')}"
-            th:error="*{subject.subjectName}"
+            th:errors="*{subject.subjectName}"
             class="alert alert-danger"
           >
             Subject Name cannot be empty
@@ -48,7 +48,7 @@
           </div>
           <div
             th:if="${#fields.hasErrors('subject.startDate')}"
-            th:error="*{subject.startDate}"
+            th:errors="*{subject.startDate}"
             class="alert alert-danger"
           >
             Start date cannot be empty
@@ -66,7 +66,7 @@
           </div>
           <div
             th:if="${#fields.hasErrors('subject.endDate')}"
-            th:error="*{subject.endDate}"
+            th:errors="*{subject.endDate}"
             class="alert alert-danger"
           >
             End date cannot be empty
@@ -220,46 +220,6 @@
       th:fragment="questionMultiple (index, questionList, state)"
       class="card m-2 shadow border border-warning"
     >
-      <!-- Delete Question Modal-->
-      <!-- <div
-        class="modal fade"
-        id="deleteQuestionModal"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="newQuestionModal"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Delete Question Confirm</h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-footer d-flex">
-              <button
-                type="button"
-                class="btn btn-outline-danger"
-                th:onclick="'deleteQuestion(' + ${index} + ');'"
-              >
-                Confirm
-              </button>
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      </div> -->
-      <!-- End Delete Modal -->
       <input type="hidden" th:field="*{questions[__${index}__].id}" />
       <input type="hidden" th:field="*{questions[__${index}__].isMultiple}" />
       <div class="card-header bg-warning bg-gradient h4 d-flex">
