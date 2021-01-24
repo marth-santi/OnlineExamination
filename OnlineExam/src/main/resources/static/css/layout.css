@@ -10,3 +10,9 @@ body {
   background-attachment: fixed;
   background-position: center;
 }
+
+tr.clickable-row:hover td {
+  background-color: aliceblue;
+  border-bottom: 2px solid blue;
+  cursor: pointer;
+}

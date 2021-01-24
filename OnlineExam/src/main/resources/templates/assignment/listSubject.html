@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}"
+>
+  <head>
+    <title>Assignment</title>
+  </head>
+  <body>
+    <div layout:fragment="content">
+      <div></div>
+      <div>
+        <form id="assignmentTem" 
+        action="#"
+        th:action="@{/assignment/assign}"
+        th:object="${subjects}"
+        method="POST">
+        <table class="table caption-top table-responsive shadow" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Select subject to assign to students">
+          <caption class="h4 alert-heading">List of Subjects</caption>
+          <thead class="table-dark">
+            <tr >
+              <th scope="col">ID</th>
+              <th scope="col">Subject Name</th>
+              <th scope="col">Start date</th>
+              <th scope="col">End date</th>
+              <th scope="col">Time limit</th>
+            </tr>
+          </thead>
+          <tbody class="table-success table-hover">
+            <tr th:each="subject, stat : ${subjects}" class="clickable-row" th:attr="data-href=${subject.id}">
+              <th scope="row" th:text="${subject.id}"></th>
+              <td th:text="${subject.subjectName}"></td>
+              <td th:text="${subject.startDate}"></td>
+              <td th:text="${subject.endDate}"></td>
+              <td th:text="${subject.time}"></td>
+            </tr>
+          </tbody>
+        </table>
+        </form>
+      </div>
+
+      <script src="/assignment/assignment.js"></script>
+      </div>
+    </div>
+  </body>
+</html>

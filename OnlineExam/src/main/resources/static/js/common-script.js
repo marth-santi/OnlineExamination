@@ -5,4 +5,5 @@ const CURRENT_URL =
 const ROUTE = {
   addQuestion: "/editor/question/add",
   deleteQuestion: "/editor/question/delete",
+  assignSubject: "/assignment/subject",
 };
