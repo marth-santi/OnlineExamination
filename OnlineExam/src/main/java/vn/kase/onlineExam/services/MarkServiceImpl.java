@@ -1,4 +1,4 @@
-package vn.kase.onlineExam.repository;
+package vn.kase.onlineExam.services;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import vn.kase.onlineExam.model.Mark;
 import vn.kase.onlineExam.model.MarkId;
+import vn.kase.onlineExam.repository.MarkRepository;
 
 @Service
 public class MarkServiceImpl implements MarkService {

@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -17,8 +16,7 @@ import vn.kase.onlineExam.model.Mark;
 import vn.kase.onlineExam.model.Question;
 import vn.kase.onlineExam.model.Subject;
 import vn.kase.onlineExam.model.User;
-import vn.kase.onlineExam.repository.MarkService;
-import vn.kase.onlineExam.services.QuestionService;
+import vn.kase.onlineExam.services.MarkService;
 import vn.kase.onlineExam.services.SubjectService;
 import vn.kase.onlineExam.services.UserService;
 
@@ -27,8 +25,6 @@ import vn.kase.onlineExam.services.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
-	@Autowired
-	private QuestionService questionService;
 	@Autowired
 	private MarkService markService;
 	@Autowired
