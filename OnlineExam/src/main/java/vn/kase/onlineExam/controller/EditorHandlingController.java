@@ -28,11 +28,14 @@ public class EditorHandlingController {
 	}
 	
 	@PostMapping("/question/delete")
-	public String deleteQuestion(@Valid @ModelAttribute("exam") EditorVM editorVM, BindingResult bindingResult) {
+	public ModelAndView deleteQuestion(@Valid @ModelAttribute("exam") EditorVM editorVM, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
-			return bindingResult.getAllErrors().toString();
+			return new ModelAndView("exam/editor", "exam", editorVM);
 		}
 
-		return editorVM.getDeleteQuestionId().toString();
+		Integer deleteId = editorVM.getDeleteQuestionId();
+		editorVM.getQuestions().remove(editorVM.getQuestions().get(deleteId));
+		System.out.println(editorVM.getQuestions().toString());
+		return new ModelAndView("exam/editor", "exam", editorVM);
 	}
 }
