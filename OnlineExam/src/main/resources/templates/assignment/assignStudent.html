@@ -18,10 +18,13 @@
         th:object="${assignVM}"
         method="POST">
         <input type="hidden" th:field="*{subject.id}" >
+        <div class="d-flex">
+          <a class="btn btn-dark me-3 shadow" th:href="@{/assignment/listexam}">Back</a>
+          <button class="btn btn-success ms-auto shadow" type="submit">Confirm assignment</button>
+        </div>
 
         <table class="table caption-top table-responsive shadow" >
           <caption class="h4 alert-heading">List of Students</caption>
-          <button class="btn btn-success" type="submit">Confirm assignment</button>
           <thead class="table-dark">
             <tr >
               <th scope="col">ID</th>

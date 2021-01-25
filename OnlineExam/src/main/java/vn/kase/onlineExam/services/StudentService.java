@@ -53,7 +53,7 @@ public class StudentService {
     List<Mark> marksToDelete = new ArrayList<Mark>();
     Mark newMark, deleteMark;
     // NOTE: the list Student Status only have student Id
-    // try{
+    try{
       for (StudentAssignmentStatus status : listStudentStatus) {
         // If Assignment status not change => do Nothing
         if (status.getIsAssigned() == status.getWasAssigned())
@@ -81,11 +81,11 @@ public class StudentService {
       if (!marksToSave.isEmpty())
         markRepo.saveAll(marksToSave);
       return true;
-    // }
-    // catch (Exception e) {
-    //   System.out.println(e.getMessage());
-    //   return false;
-    // }
+    }
+    catch (Exception e) {
+      System.out.println(e.getStackTrace());
+      return false;
+    }
     
   }
 }

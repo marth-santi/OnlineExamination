@@ -71,6 +71,24 @@
           >
             End date cannot be empty
           </div>
+          <!-- Time limit -->
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">End Date</span>
+            </div>
+            <input
+              type="date"
+              class="form-control"
+              th:field="*{subject.time}"
+            />
+          </div>
+          <div
+            th:if="${#fields.hasErrors('subject.time')}"
+            th:errors="*{subject.time}"
+            class="alert alert-danger"
+          >
+            Time limit error
+          </div>
         </div>
       </div>
     </div>

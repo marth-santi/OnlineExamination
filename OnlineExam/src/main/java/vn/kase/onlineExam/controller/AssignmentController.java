@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import vn.kase.onlineExam.model.Mark;
 import vn.kase.onlineExam.model.Subject;
@@ -59,9 +60,9 @@ public class AssignmentController {
   }
   
   @PostMapping("/assign")
-  public Boolean assign(@ModelAttribute(value = "assignVM") AssignmentVM assignVM, BindingResult bindingResult) {
+  public RedirectView assign(@ModelAttribute(value = "assignVM") AssignmentVM assignVM, BindingResult bindingResult) {
     Subject subject = subjectRepo.findById(assignVM.getSubject().getId()).orElse(null);
     Boolean result = studentService.assignSubjectToStudents(subject, assignVM.getStudents());
-    return result;
+    return new RedirectView("/assignment/subject/" + subject.getId());
   }
 }
