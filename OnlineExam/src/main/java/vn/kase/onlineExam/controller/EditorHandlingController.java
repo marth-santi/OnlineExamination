@@ -22,7 +22,10 @@ public class EditorHandlingController {
 			return new ModelAndView("exam/editor", "exam", editorVM);
 		}
 
-		editorVM.getQuestions().add((new QuestionVM()).setIsMultiple(editorVM.getIsMultipleChoiceNewQuestion()));
+		editorVM.getQuestions().add(
+				(new QuestionVM())
+				.setIsMultiple(editorVM.getIsMultipleChoiceNewQuestion())
+			);
 		return new ModelAndView("exam/editor", "exam", editorVM);
 	}
 	

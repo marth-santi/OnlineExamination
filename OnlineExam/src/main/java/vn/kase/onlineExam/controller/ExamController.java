@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,6 +24,13 @@ public class ExamController {
 	@GetMapping("/exam/editor")
 	public ModelAndView createExam() {
 		return new ModelAndView("exam/editor", "exam", new EditorVM());
+	}
+
+	@GetMapping("/exam/editor/{subjectId}")
+	public ModelAndView editExam(@PathVariable(name = "subjectId") Integer subjectId) {
+		Exam exam = examService.getExam(subjectId);
+		EditorVM editorVM = new EditorVM(exam);
+		return new ModelAndView("exam/editor", "exam", editorVM);
 	}
 	
 	@PostMapping("/exam/submitExam")

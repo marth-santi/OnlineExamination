@@ -32,7 +32,7 @@ public class QuestionController {
 	public String review(ModelMap model,@PathVariable(name="subjectId" ) Integer subjectId) {
 			List<Question> listReview = questionService.findAllBySubjectId(subjectId);
 			model.addAttribute("listReview", listReview);
-			model.addAttribute("subject", subjectService.findById(subjectId));
+			model.addAttribute("subject", subjectService.findById(subjectId).orElse(null));
 			return "question/review";
 	}
 }
