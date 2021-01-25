@@ -22,6 +22,7 @@
           <thead class="table-dark">
             <tr >
               <th scope="col">ID</th>
+              <th scope="col">Assign Status</th>
               <th scope="col">Username</th>
               <th scope="col">Full Name</th>
               <th scope="col">Mobile</th>
@@ -31,6 +32,10 @@
           <tbody class="table-success table-hover">
             <tr th:each="student, stat : ${students}" class="clickable-row" th:attr="data-href=${student.id}">
               <th scope="row" th:text="${student.id}"></th>
+              <td >
+                <input type="checkbox" class="btn-check" th:id="${student.id}" autocomplete="off">
+                <label class="btn btn-outline-primary" th:for="${student.id}">Assigned</label>
+              </td>
               <td th:text="${student.username}"></td>
               <td th:text="${student.fullname}"></td>
               <td th:text="${student.mobile}"></td>
