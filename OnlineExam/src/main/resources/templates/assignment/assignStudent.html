@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}"
+>
+  <head>
+    <title>Assignment</title>
+  </head>
+  <body>
+    <div layout:fragment="content">
+      <div></div>
+      <div>
+        <form id="assignmentTem" 
+        action="#"
+        th:action="@{/assignment/assign}"
+        th:object="${students}"
+        method="POST">
+        <table class="table caption-top table-responsive shadow" >
+          <caption class="h4 alert-heading">List of Students</caption>
+          <thead class="table-dark">
+            <tr >
+              <th scope="col">ID</th>
+              <th scope="col">Username</th>
+              <th scope="col">Full Name</th>
+              <th scope="col">Mobile</th>
+              <th scope="col">Email</th>
+            </tr>
+          </thead>
+          <tbody class="table-success table-hover">
+            <tr th:each="student, stat : ${students}" class="clickable-row" th:attr="data-href=${student.id}">
+              <th scope="row" th:text="${student.id}"></th>
+              <td th:text="${student.username}"></td>
+              <td th:text="${student.fullname}"></td>
+              <td th:text="${student.mobile}"></td>
+              <td th:text="${student.email}"></td>
+            </tr>
+          </tbody>
+        </table>
+        </form>
+      </div>
+
+      <script src="/assignment/assignment.js"></script>
+      </div>
+    </div>
+  </body>
+</html>
