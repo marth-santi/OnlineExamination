@@ -14,6 +14,9 @@ import vn.kase.onlineExam.model.MarkId;
 public interface MarkRepository extends CrudRepository<Mark, MarkId> {
 
 	@Query(value = "some query", nativeQuery = true)
-    Long findAmountOfFriends(@Param("userId") Long userId);
+	Long findAmountOfFriends(@Param("userId") Long userId);
+	
 	List<Mark> findAllByStudentId(Integer studentId);
+
+	List<Mark> findByStudentIdAndSubjectId(Integer studentId, Integer subjectId);
 }

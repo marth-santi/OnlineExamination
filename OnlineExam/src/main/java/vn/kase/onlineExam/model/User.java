@@ -20,30 +20,30 @@ public class User {
 	@Id
     @Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+	protected Integer id;
 	
 	@Column(name = "fullname")
-	private String fullname;
+	protected String fullname;
 	
 	@Column(name = "mobile")
-	private String mobile;
+	protected String mobile;
 	
 	@Column(name = "email")
-	private String email;
+	protected String email;
 	
 	@Column(name = "address")
-	private String address;
+	protected String address;
 	
 	@Column(name = "username")
-	private String username;
+	protected String username;
 	
 	@Column(name = "pass")
-	private String pass;
+	protected String pass;
 	
 	@Column(name = "roles")
-	private int roles;
+	protected int roles;
 	
-	@Column(name = "confirm")
-	private boolean confirm;
+	@Column(name = "confirm", columnDefinition = "boolean default false")
+	protected boolean confirm;
 	
 }

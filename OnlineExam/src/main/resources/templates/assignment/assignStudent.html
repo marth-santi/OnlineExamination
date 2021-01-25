@@ -15,10 +15,13 @@
         <form id="assignmentTem" 
         action="#"
         th:action="@{/assignment/assign}"
-        th:object="${students}"
+        th:object="${assignVM}"
         method="POST">
+        <input type="hidden" th:field="*{subject.id}" >
+
         <table class="table caption-top table-responsive shadow" >
           <caption class="h4 alert-heading">List of Students</caption>
+          <button class="btn btn-success" type="submit">Confirm assignment</button>
           <thead class="table-dark">
             <tr >
               <th scope="col">ID</th>
@@ -30,11 +33,23 @@
             </tr>
           </thead>
           <tbody class="table-success table-hover">
-            <tr th:each="student, stat : ${students}" class="clickable-row" th:attr="data-href=${student.id}">
-              <th scope="row" th:text="${student.id}"></th>
+            <tr th:each="student, stat : ${assignVM.students}">
+              <input type="hidden" th:field="*{students[__${stat.index}__].id}" >
+              <th scope="row" th:text="${student.id}">
+              </th>
               <td >
-                <input type="checkbox" class="btn-check" th:id="${student.id}" autocomplete="off">
-                <label class="btn btn-outline-primary" th:for="${student.id}">Assigned</label>
+                <div class="form-check form-switch d-inline" role="group">
+                  <input type="checkbox" class="form-check-input me-1 ms-1" th:id="${student.id}" th:field="*{students[__${stat.index}__].isAssigned}" autocomplete="off"/>
+                  <label class="btn btn-outline-success" th:for="${student.id}" th:field="*{students[__${stat.index}__].isAssigned}">Assign</label>
+                </div>
+                <input type="hidden" th:field="*{students[__${stat.index}__].wasAssigned}" >
+                <input type="hidden" th:field="*{students[__${stat.index}__].isExamDone}" >
+                <th:block th:if="${student.wasAssigned}">
+                  <button class="btn btn-outline-secondary ms-2 d-inline" disabled>Old assigned</button>
+                </th:block>
+                <th:block th:if="${student.isExamDone}">
+                  <button class="btn btn-outline-secondary ms-2 d-inline" disabled>Exam Done</button>
+                </th:block>
               </td>
               <td th:text="${student.username}"></td>
               <td th:text="${student.fullname}"></td>
