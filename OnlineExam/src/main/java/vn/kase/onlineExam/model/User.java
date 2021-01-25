@@ -40,8 +40,8 @@ public class User {
 	@Column(name = "pass")
 	private String pass;
 	
-	@Column(name = "role")
-	private int role;
+	@Column(name = "roles")
+	private int roles;
 	
 	@Column(name = "confirm")
 	private boolean confirm;
