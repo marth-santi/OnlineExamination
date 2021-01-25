@@ -16,3 +16,20 @@ tr.clickable-row:hover td {
   border-bottom: 2px solid blue;
   cursor: pointer;
 }
+
+li.nav-item {
+  transition: background-color 0.2s;
+}
+
+li.nav-item:hover {
+  background-color: aliceblue;
+  box-shadow: 0 0 3px 3px aliceblue;
+}
+
+li.nav-item > a.nav-link {
+  transition: color 0.3s;
+}
+
+li.nav-item > a.nav-link:hover {
+  color: black !important;
+}
