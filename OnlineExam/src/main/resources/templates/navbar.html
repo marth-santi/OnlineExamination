@@ -28,5 +28,80 @@
         </ul>
       </div>
     </th:block>
+
+    <!-- Student navbar -->
+    <th:block layout:fragment="navbarStudent">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarText"
+        aria-controls="navbarText"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item rounded">
+            <a class="nav-link" href="#">Student</a>
+          </li>
+          <li class="nav-item rounded">
+            <a class="nav-link" href="#">Results</a>
+          </li>
+        </ul>
+      </div>
+    </th:block>
+
+    <!-- Teacher navbar -->
+    <th:block layout:fragment="navbarTeacher">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarText"
+        aria-controls="navbarText"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item rounded">
+            <a class="nav-link" th:href="@{}">Manage Exams</a>
+          </li>
+          <li class="nav-item rounded">
+            <a class="nav-link" th:href="@{}">Assignments</a>
+          </li>
+        </ul>
+      </div>
+    </th:block>
+
+    <!-- Admin navbar -->
+    <th:block layout:fragment="navbarAdmin">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarText"
+        aria-controls="navbarText"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item rounded">
+            <a class="nav-link" th:href="@{}">Manage Exams</a>
+          </li>
+          <li class="nav-item rounded">
+            <a class="nav-link" th:href="@{}">Assignments</a>
+          </li>
+        </ul>
+      </div>
+    </th:block>
   </body>
 </html>
