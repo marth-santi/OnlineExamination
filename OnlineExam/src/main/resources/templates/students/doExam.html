@@ -43,8 +43,21 @@
 					</div>
 				</div>
 				<!-- EndSubject -->
-				<hr />
-			
+				<hr />5
+				<!-- CLock -->
+				<div>
+					<div id="countdown">
+						<div id='tiles'></div>
+						<div class="labels">
+							<li>Days</li>
+							<li>Hours</li>
+							<li>Mins</li>
+							<li>Secs</li>
+						</div>
+					</div>
+				</div>
+				
+				<!-- EndClock -->
 				<!-- Test -->
 				<th:block th:if="${#lists.isEmpty(questions.pageList)}">
 					<h3>No question</h3>
@@ -81,17 +94,7 @@
 								</ul>
 							</div>
 							
-							<!-- CLock -->
-							<div id="countdown">
-								<div id='tiles'></div>
-								<div class="labels">
-									<li>Days</li>
-									<li>Hours</li>
-									<li>Mins</li>
-									<li>Secs</li>
-								</div>
-							</div>
-							<!-- EndClock -->
+							
 							
 						</div>
 						<div class="row">
@@ -223,6 +226,7 @@
 			</div>
 		</div>
 
+		<script src="/students/clock.js"></script>
 	</div>
 	
 	<script

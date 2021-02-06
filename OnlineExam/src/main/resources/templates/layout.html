@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -49,27 +53,7 @@
           />
           Online Exam
         </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarText"
-          aria-controls="navbarText"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarText">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item rounded">
-              <a class="nav-link" href="#">Teacher</a>
-            </li>
-            <li class="nav-item rounded">
-              <a class="nav-link" href="#">Student</a>
-            </li>
-          </ul>
-        </div>
+        <div layout:replace="~{navbar :: navbar}"></div>
       </div>
     </nav>
     <!-- End Navigation Bar -->
