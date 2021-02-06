@@ -21,3 +21,11 @@ function getCountdown(){
 function pad(n) {
     return (n < 10 ? '0' : '') + n;
 }
+
+
+
+var form = document.getElementById("form-id");
+
+document.getElementById("your-id").addEventListener("click", function () {
+  form.submit();
+});
