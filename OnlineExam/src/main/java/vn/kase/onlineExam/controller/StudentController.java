@@ -5,7 +5,10 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.xml.ws.spi.http.HttpContext;
 
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
@@ -13,12 +16,16 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import vn.kase.onlineExam.model.Answer;
 import vn.kase.onlineExam.model.Question;
 import vn.kase.onlineExam.model.Subject;
+import vn.kase.onlineExam.model.User;
+import vn.kase.onlineExam.services.AnswerService;
 import vn.kase.onlineExam.services.QuestionService;
 import vn.kase.onlineExam.services.SubjectService;
 
@@ -31,6 +38,8 @@ public class StudentController {
 	SubjectService subjectService;
 	@Autowired
 	QuestionService questionService;
+	@Autowired
+	AnswerService answerService;
 	
 	@RequestMapping("/viewExam")
 	public String viewExam(ModelMap model,@RequestParam(value = "subjectId", required = true) Integer subjectId){
@@ -51,15 +60,15 @@ public class StudentController {
 		request.getSession().setAttribute("listQuestion", null);
 		return "redirect:/students/doExam/page/1";
 	}
-	
+
 	@GetMapping("/doExam/page/{pageNumber}")
 	public String showQuestionPage(HttpServletRequest request, 
-			@PathVariable int pageNumber, Model model) {
+			@PathVariable int pageNumber, Model model, Answer answer) {
+		model.addAttribute("answer", new Answer());
 		PagedListHolder<?> pages = (PagedListHolder<?>) request.getSession().getAttribute("listQuestion");
 		int pagesize = 1;
 		Subject subject =(Subject) request.getSession().getAttribute("subject");
 		List<Question> list = questionService.findAllBySubjectId(subject.getId());
-		System.out.println(list.size());
 		if (pages == null) {
 			pages = new PagedListHolder<>(list);
 			pages.setPageSize(pagesize);
@@ -83,7 +92,7 @@ public class StudentController {
 		model.addAttribute("totalPageCount", totalPageCount);
 		model.addAttribute("baseUrl", baseUrl);
 		model.addAttribute("questions", pages);
-
+		System.out.println(answer.getStudentId()+"edf");
 		return "students/doExam";
 	}
 }

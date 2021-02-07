@@ -11,6 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import vn.kase.onlineExam.model.Mark;
 import vn.kase.onlineExam.model.Question;
@@ -22,6 +23,7 @@ import vn.kase.onlineExam.services.UserService;
 
 @Controller
 @RequestMapping("/")
+@SessionAttributes
 public class UserController {
 	@Autowired
 	private UserService userService;
