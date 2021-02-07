@@ -33,11 +33,22 @@ public class UserController {
 	private SubjectService subjectService;
 	
 	@GetMapping("/")
-	public String login(ModelMap model) {
+	public String login(ModelMap model, HttpSession session) {
 		User user = new User();
 		model.addAttribute("user", user);
+		if(session.getAttribute("student") != null) {
+			return "students/viewStudent";
+		}
+		if(session.getAttribute("admin") != null) {
+			return "admin/viewAdmin";
+		}
+		if(session.getAttribute("staff") != null) {
+			return "staff/viewStaff";
+		}
+		
 		return "login";
-	}		
+	}
+	
 	@PostMapping("/viewInfo")
 	public String check(ModelMap model,User user, HttpSession session) {
 		String username = user.getUsername();
@@ -47,7 +58,7 @@ public class UserController {
 		if(user1 == null || !(pass.equals(user1.getPass())))
 		{
 			model.addAttribute("message", "*Username or password incorect !");
-			return login(model);
+			return login(model,session);
 		}
 		if(user1.getRoles() == 1)
 		{
@@ -72,6 +83,22 @@ public class UserController {
 			model.addAttribute("listSubject", listSubject);
 			return "students/viewStudent";
 		}
-		return login(model);
+		return login(model,session);
+	}
+	
+	@GetMapping("/logout")
+	public String logout(ModelMap model,HttpSession session) {
+		if(session.getAttribute("student") != null) {
+			session.removeAttribute("student");
+		}
+		if(session.getAttribute("admin") != null) {
+			session.removeAttribute("admin");
+		}
+		if(session.getAttribute("staff") != null) {
+			session.removeAttribute("staff");
+		}
+		User user = new User();
+		model.addAttribute("user", user);
+		return "login";
 	}
 }

@@ -29,7 +29,7 @@
             </tr>
           </thead>
           <tbody class="table-success table-hover">
-            <tr th:each="subject, stat : ${subjects}" class="clickable-row" th:attr="data-href=${subject.id}">
+            <tr th:each="subject, stat : ${subjects}" class="row" th:attr="data-href=${subject.id}">
               <th scope="row" th:text="${subject.id}"></th>
               <td th:text="${subject.subjectName}"></td>
               <td th:text="${subject.startDate}"></td>
