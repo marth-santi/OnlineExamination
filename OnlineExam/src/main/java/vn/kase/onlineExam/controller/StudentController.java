@@ -53,8 +53,7 @@ public class StudentController {
 	}
 	
 	@GetMapping("/doExam")
-	public String doExam(Model model,Subject subject,HttpServletRequest request
-			,RedirectAttributes redirect) {	
+	public String doExam(Model model,Subject subject,HttpServletRequest request, RedirectAttributes redirect) {	
 		model.addAttribute("subject", subject);
 		request.getSession().setAttribute("subject", subject);
 		request.getSession().setAttribute("listQuestion", null);
@@ -62,8 +61,8 @@ public class StudentController {
 	}
 
 	@GetMapping("/doExam/page/{pageNumber}")
-	public String showQuestionPage(HttpServletRequest request, 
-			@PathVariable int pageNumber, Model model, Answer answer) {
+	public String showQuestionPage(HttpServletRequest request, @PathVariable int pageNumber, Model model) {
+		String baseUrl = "/students/doExam/page/";
 		model.addAttribute("answer", new Answer());
 		PagedListHolder<?> pages = (PagedListHolder<?>) request.getSession().getAttribute("listQuestion");
 		int pagesize = 1;
@@ -83,7 +82,6 @@ public class StudentController {
 		int begin = Math.max(1, current - list.size());
 		int end = Math.min(begin + 5, pages.getPageCount());
 		int totalPageCount = pages.getPageCount();
-		String baseUrl = "/students/doExam/page/";
 		
 		model.addAttribute("subject", subject);
 		model.addAttribute("beginIndex", begin);
@@ -92,7 +90,7 @@ public class StudentController {
 		model.addAttribute("totalPageCount", totalPageCount);
 		model.addAttribute("baseUrl", baseUrl);
 		model.addAttribute("questions", pages);
-		System.out.println(answer.getStudentId()+"edf");
+		// System.out.println(answer.getStudentId()+"edf");
 		return "students/doExam";
 	}
 }
