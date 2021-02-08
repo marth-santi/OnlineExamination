@@ -37,6 +37,17 @@ public class UserController {
 		User user = new User();
 		model.addAttribute("user", user);
 		if(session.getAttribute("student") != null) {
+			model.addAttribute("question", new Question());
+			List<Integer> listInt = new ArrayList<Integer>();
+			List<Mark> listMark = new ArrayList<Mark>();
+			User user1 =(User) session.getAttribute("student");
+			listMark= markService.findAllByStudentId(user1.getId());
+			for (Mark mark : listMark) {
+				if(mark.getMarks()== null)
+					listInt.add(mark.getSubjectId());
+			}
+			List<Subject> listSubject = subjectService.findAllById(listInt);
+			model.addAttribute("listSubject", listSubject);
 			return "students/viewStudent";
 		}
 		if(session.getAttribute("admin") != null) {
@@ -77,6 +88,7 @@ public class UserController {
 			List<Mark> listMark = new ArrayList<Mark>();
 			listMark= markService.findAllByStudentId(user1.getId());
 			for (Mark mark : listMark) {
+				if(mark.getMarks()== null)
 				listInt.add(mark.getSubjectId());
 			}
 			List<Subject> listSubject = subjectService.findAllById(listInt);

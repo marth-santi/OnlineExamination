@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+<head>
+<title>Exam Editor</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link th:href="@{/css/styles.css}" rel="stylesheet" />
+</head>
+<meta charset="UTF-8">
+<title>Results</title>
+</head>
+<body>
+<div layout:fragment="content">
+	<table class="table caption-top table-responsive shadow table-hover table-bordered">
+          <caption class="h4 alert-heading">List of Results
+          </caption>
+          <thead class="table-dark">
+            <tr >
+              <th scope="col">STT</th>
+              <th scope="col">Exam</th>
+              <th scope="col">Mark</th>
+              <th scope="col">Date</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody class="table-success table-hover">
+            <tr th:each="mark : ${listMarks}">
+              <td th:text="${listMarks.indexOf(mark)+1}"></td>
+              <td th:text="${mark.subject.subjectName}"></td>
+              <td th:text="${mark.marks}"></td>
+              <td th:text="${mark.testDate}"></td>
+              <td th:unless="${mark.marks != null}"></td>
+              <td th:if="${mark.marks != null}" th:text="${mark.marks >=4?'Pass':'Fail'}" style="font-weight: bold;"></td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+
+</body>
+</html>

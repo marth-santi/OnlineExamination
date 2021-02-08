@@ -46,4 +46,6 @@ public class Subject implements Serializable {
 	
 	@Column(name="times")
 	private Integer time;
+	
+	private int totalQuestion;
 }

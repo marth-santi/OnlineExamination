@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -36,5 +38,8 @@ public class Mark implements Serializable {
   private Integer marks;
 
   @Column(name="test_date")
+  @DateTimeFormat(pattern = "MM/dd/yyyy")
   private Date testDate;
+  
+  private Subject subject;
 }
