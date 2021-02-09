@@ -15,18 +15,15 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <body>
 	<div class="main">
 		<div class="main-w3l">
-			<h1 class="logo-w3">Online Exam Login Form</h1>
+			<h1 class="logo-w3">Retrieve Password</h1>
 			<div class="w3layouts-main">
-				<h2><span>Login now</span></h2>
-					<form th:action="@{/viewInfo}" th:object="${user}" method="post">
-						<input placeholder="Username" th:field="*{username}" type="text" required="required">
-						<input placeholder="Password" th:field="*{pass}" type="password" required="required">
-						<input type="submit" value="Get Started">
+				<h2><span>Input Email</span></h2>
+					<form th:action="@{/getEmail}" method="post">
+						<input placeholder="Your Email" name="email" type="email" required="required">
+						<input type="submit" value="Retrieve My Password">
 					</form>
-					<div th:if="${message != null}">
-					<h1 id="messageLogin" th:text="${message}"></h1>
-					</div>
-					<h6><a th:href="@{/forgetEmail}">Lost Your Password?</a></h6>
+					<div th:if="${message != null}" class="text-info"><span th:text="${message}"></span></div>
+					<h6><a href="/">Back to Login</a></h6>
 			</div>
 			<!-- //main -->
 			

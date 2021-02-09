@@ -11,6 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import vn.kase.onlineExam.model.Mark;
@@ -20,6 +21,9 @@ import vn.kase.onlineExam.model.User;
 import vn.kase.onlineExam.services.MarkService;
 import vn.kase.onlineExam.services.SubjectService;
 import vn.kase.onlineExam.services.UserService;
+
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 
 @Controller
 @RequestMapping("/")
@@ -31,6 +35,8 @@ public class UserController {
 	private MarkService markService;
 	@Autowired
 	private SubjectService subjectService;
+	@Autowired
+	private JavaMailSender javaMailSender;
 	
 	@GetMapping("/")
 	public String login(ModelMap model, HttpSession session) {
@@ -112,5 +118,22 @@ public class UserController {
 		User user = new User();
 		model.addAttribute("user", user);
 		return "login";
+	}
+	
+	@GetMapping("/forgetEmail")
+	public String forgetEmail() {
+		return "forgetEmail";
+	}
+	
+	@PostMapping("/getEmail")
+	public String getEmail(ModelMap model,@RequestParam String email) {
+		User user = userService.findByEmail(email);
+		SimpleMailMessage msg = new SimpleMailMessage();
+		msg.setTo(user.getEmail());
+		msg.setSubject("Retrieve Your Password Online Exam");
+		msg.setText("Your password : "+ user.getPass());
+		javaMailSender.send(msg);
+		model.addAttribute("message", "Password has been sent to your mail!");
+		return "forgetEmail";
 	}
 }

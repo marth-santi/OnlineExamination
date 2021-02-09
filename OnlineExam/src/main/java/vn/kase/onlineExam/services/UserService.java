@@ -33,4 +33,6 @@ public interface UserService {
 
 	List<User> findByRoles(int roles);
 
+	User findByEmail(String email);
+
 }
