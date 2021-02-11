@@ -42,8 +42,8 @@
     <nav
       class="navbar navbar-dark bg-dark bg-gradient navbar-expand-lg mb-2 sticky-top"
     >
-      <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/}">
+      <div class="container-fluid" style="justify-content: left;">
+        <a class="navbar-brand" href="/">
           <img
             src="/book.png"
             alt=""
@@ -53,7 +53,15 @@
           />
           Online Exam
         </a>
-        <div layout:replace="~{navbar :: navbar}"></div>
+        <div th:if="${session.student != null}">
+        	<div layout:replace="~{navbar :: navbarStudent}"></div>
+        </div>
+        <div th:if="${session.staff != null}">
+        	<div layout:replace="~{navbar :: navbarTeacher}"></div>
+        </div>
+		<div th:if="${session.admin != null}">
+        	<div layout:replace="~{navbar :: navbarAdmin}"></div>
+        </div>
       </div>
     </nav>
     <!-- End Navigation Bar -->

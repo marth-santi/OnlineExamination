@@ -6,18 +6,12 @@
   layout:decorate="~{layout}"
 >
   <head>
-    <title>Assignment</title>
+    <title>Manage Exam</title>
   </head>
   <body>
     <div layout:fragment="content">
-      <div></div>
       <div>
-        <form id="assignmentTem" 
-        action="#"
-        th:action="@{/assignment}"
-        th:object="${subjects}"
-        method="POST">
-        <table class="table caption-top table-responsive shadow" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Select subject to assign to students">
+        <table class="table caption-top table-responsive shadow table-hover" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Select subject to assign to students">
           <caption class="h4 alert-heading">List of Subjects</caption>
           <thead class="table-dark">
             <tr >
@@ -26,22 +20,27 @@
               <th scope="col">Start date</th>
               <th scope="col">End date</th>
               <th scope="col">Time limit</th>
+              <th scope="col">Total question</th>
+              <th scope="col" style="text-align: center;">Action</th>
             </tr>
           </thead>
           <tbody class="table-success table-hover">
-            <tr th:each="subject, stat : ${subjects}" class="clickable-row" th:attr="data-href=${subject.id}">
+            <tr th:each="subject : ${listSubject}">
               <th scope="row" th:text="${subject.id}"></th>
               <td th:text="${subject.subjectName}"></td>
               <td th:text="${subject.startDate}"></td>
               <td th:text="${subject.endDate}"></td>
               <td th:text="${subject.time}"></td>
+              <td th:text="${subject.totalQuestion}"></td>
+              <td style="text-align: center;">
+              	<a class="btn btn-info" th:href="@{'/staff/viewQuestion/'+${subject.id}}">View List Question</a>
+              	<a class="btn btn-success" th:href="@{'/exam/editor/'+${subject.id}}">Add Or Remove Question</a>
+              </td>
             </tr>
           </tbody>
         </table>
-        </form>
       </div>
-
-      <script src="/assignment/assignment.js"></script>
+      <script src="/staff/staff.js"></script>
       </div>
   </body>
 </html>

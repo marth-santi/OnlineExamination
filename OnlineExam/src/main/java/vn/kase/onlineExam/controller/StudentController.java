@@ -1,14 +1,15 @@
 package vn.kase.onlineExam.controller;
 
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.xml.ws.spi.http.HttpContext;
 
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
@@ -16,16 +17,17 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import vn.kase.onlineExam.model.Answer;
+import vn.kase.onlineExam.model.Mark;
 import vn.kase.onlineExam.model.Question;
 import vn.kase.onlineExam.model.Subject;
 import vn.kase.onlineExam.model.User;
 import vn.kase.onlineExam.services.AnswerService;
+import vn.kase.onlineExam.services.MarkService;
 import vn.kase.onlineExam.services.QuestionService;
 import vn.kase.onlineExam.services.SubjectService;
 
@@ -40,9 +42,11 @@ public class StudentController {
 	QuestionService questionService;
 	@Autowired
 	AnswerService answerService;
+	@Autowired
+	MarkService markService;
 	
 	@RequestMapping("/viewExam")
-	public String viewExam(ModelMap model,@RequestParam(value = "subjectId", required = true) Integer subjectId){
+	public String viewExam(ModelMap model,@RequestParam(value = "subjectId", required = true) int subjectId){
 		Optional<Subject> subject = subjectService.findById(subjectId);
 		if(subject.isPresent())
 		{
@@ -92,5 +96,21 @@ public class StudentController {
 		model.addAttribute("questions", pages);
 		// System.out.println(answer.getStudentId()+"edf");
 		return "students/doExam";
+	}
+	
+	@GetMapping("/results")
+	public String result(ModelMap model, HttpSession session) {
+		User user =(User) session.getAttribute("student");
+		List<Mark> listMarks = markService.findAllByStudentId(user.getId());
+		for (Mark mark : listMarks) {
+			Subject subject = subjectService.findById(mark.getSubjectId()).get();
+			mark.setSubject(subject);
+			/*
+			 * if(mark.getSubject().getEndDate().compareTo(new Date())<0); {
+			 * mark.setMarks(0); markService.save(mark); }
+			 */
+		}
+		model.addAttribute("listMarks", listMarks);
+		return "students/results";
 	}
 }
