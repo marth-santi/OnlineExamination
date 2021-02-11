@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import logo from "./logo.svg";
 import "./App.css";
+import CONSTANT from "./CONST";
 
 function App() {
   const [data, setData] = useState("");
   useEffect(() => {
-    fetch("//localhost:8080/api/students/test")
+    fetch(CONSTANT.api.test)
       .then(
         async (res: Response): Promise<string> => {
           //console.log(res.text());
@@ -18,12 +18,7 @@ function App() {
   });
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <p>{data}</p>
-      </header>
+      <p>{data}</p>
     </div>
   );
 }
