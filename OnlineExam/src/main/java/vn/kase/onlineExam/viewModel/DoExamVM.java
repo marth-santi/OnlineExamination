@@ -3,7 +3,6 @@ package vn.kase.onlineExam.viewModel;
 import java.io.Serializable;
 import java.util.List;
 
-import org.springframework.beans.support.PagedListHolder;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

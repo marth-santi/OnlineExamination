@@ -6,7 +6,7 @@ function App() {
   const [data, setData] = useState("");
   const [data2, setData2] = useState("");
   useEffect(() => {
-    fetch(CONSTANT.api.test)
+    fetch(CONSTANT.API.test)
       .then(
         async (res: Response): Promise<string> => {
           return res.text();
@@ -15,7 +15,7 @@ function App() {
       .then((data: string): void => {
         setData(data);
       });
-    fetch(CONSTANT.api.getExam)
+    fetch(CONSTANT.API.getExam)
       .then(
         async (res: Response): Promise<string> => {
           return res.json();
