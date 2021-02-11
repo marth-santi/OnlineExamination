@@ -58,7 +58,7 @@ public class StudentController {
 		model.addAttribute("subject", subject);
 		request.getSession().setAttribute("subject", subject);
 		request.getSession().setAttribute("listQuestion", null);
-		return "redirect:/students/doExam/page/1";
+		return "/doExamApp/index";
 	}
 
 	@GetMapping("/doExam/page/{pageNumber}")

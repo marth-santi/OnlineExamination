@@ -16,10 +16,10 @@ spring:
   web.resources:
     chain.strategy.content.enabled: true
     chain.strategy.content.paths: /**
-    static-locations: classpath:/static/,classpath:/templates/
+    static-locations: classpath:/static/,classpath:/templates/,classpath:/templates/doExamApp/
   flyway:
     baseline-on-migrate: true
-    create-schemas: true   
+    create-schemas: true
   mail:
     Host: smtp.gmail.com
     port: 587
