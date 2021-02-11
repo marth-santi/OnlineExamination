@@ -1,19 +1,13 @@
 package vn.kase.onlineExam.viewModel;
 
-import java.io.Serializable;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-import vn.kase.onlineExam.model.Mark;
 import vn.kase.onlineExam.model.Subject;
 import vn.kase.onlineExam.model.User;
-import vn.kase.onlineExam.repository.MarkRepository;
 
 @Data
 @AllArgsConstructor
