@@ -1,7 +1,8 @@
+var BASE_URL = window.location.origin;
 const CONST = {
   API: {
-    test: "//localhost:8080/api/students/test",
-    getExam: "//localhost:8080/api/students/getExam",
+    test: `${BASE_URL}/api/students/test`,
+    getExam: `${BASE_URL}/api/students/getExam`,
   },
 };
 
