@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import CONSTANT from "./CONST";
+import { IExamResponse } from "./models/ExamResponse";
 
 function App() {
   const [data, setData] = useState("");
@@ -17,12 +18,13 @@ function App() {
       });
     fetch(CONSTANT.API.getExam)
       .then(
-        async (res: Response): Promise<string> => {
+        async (res: Response): Promise<IExamResponse> => {
           return res.json();
         }
       )
-      .then((data2: any): void => {
+      .then((data2: IExamResponse): void => {
         console.log(data2);
+        console.log(data2[0].question);
       });
   });
   return (
