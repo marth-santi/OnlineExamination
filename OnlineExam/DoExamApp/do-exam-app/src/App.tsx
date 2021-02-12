@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import CONSTANT from "./CONST";
-import { IExamResponse } from "./models/ExamResponse";
+import CONSTANT from "CONST";
+import { IExamResponse } from "models/ExamModels";
 
 function App() {
   const [data, setData] = useState("");
@@ -16,6 +16,8 @@ function App() {
       .then((data: string): void => {
         setData(data);
       });
+  });
+  useEffect(() => {
     fetch(CONSTANT.API.getExam)
       .then(
         async (res: Response): Promise<IExamResponse> => {
