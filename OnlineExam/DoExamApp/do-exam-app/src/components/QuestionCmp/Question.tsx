@@ -29,7 +29,8 @@ const useStyles = makeStyles({
   question: {
     backgroundColor: green[600],
     color: lightBlue[50],
-    padding: 10,
+    padding: 5,
+    paddingLeft: 10,
     textAlign: "left",
   },
   option: {},
