@@ -34,4 +34,4 @@ build/
 /.attach_pid29681
 
 ### React build path ###
-./src/main/resources/templates/doExamApp/static
+src/main/resources/templates/doExamApp/static

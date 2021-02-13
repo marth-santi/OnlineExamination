@@ -16,4 +16,4 @@ export interface IQuestionResponse extends IQuestion {
   isCheckedOp4: boolean;
 }
 
-export type IExamResponse = Array<IQuestionResponse>;
+export type IExam = Array<IQuestion>;
