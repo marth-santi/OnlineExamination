@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-
 import vn.kase.onlineExam.model.Mark;
 import vn.kase.onlineExam.model.Question;
 import vn.kase.onlineExam.model.Subject;
@@ -69,7 +68,7 @@ public class UserController {
 	@PostMapping("/viewInfo")
 	public String check(ModelMap model,User user, HttpSession session) {
 		String username = user.getUsername();
-		String pass = user.getPass();
+		String pass = new MD5().getMd5(user.getPass());
 		User user1 = userService.findByUsername(username);
 		model.addAttribute("question", new Question());
 		if(user1 == null || !(pass.equals(user1.getPass())))
@@ -127,13 +126,23 @@ public class UserController {
 	
 	@PostMapping("/getEmail")
 	public String getEmail(ModelMap model,@RequestParam String email) {
-		User user = userService.findByEmail(email);
-		SimpleMailMessage msg = new SimpleMailMessage();
-		msg.setTo(user.getEmail());
-		msg.setSubject("Retrieve Your Password Online Exam");
-		msg.setText("Your password : "+ user.getPass());
-		javaMailSender.send(msg);
-		model.addAttribute("message", "Password has been sent to your mail!");
+		try {
+			User user = userService.findByEmail(email);
+			SimpleMailMessage msg = new SimpleMailMessage();
+			msg.setTo(user.getEmail());
+			msg.setSubject("Retrieve Your Password Online Exam");
+			RandomStringExmple random = new RandomStringExmple();
+			String newPass = random.randomAlphaNumeric(8);
+			user.setPass(new MD5().getMd5(newPass));
+			msg.setText("Your password : "+ newPass);
+			javaMailSender.send(msg);
+			userService.save(user);
+			model.addAttribute("message", "Password has been sent to your mail!");
+		} catch (Exception e) {
+			model.addAttribute("message", "Your Email Invalid!");
+		}
+		
+		
 		return "forgetEmail";
 	}
 }

@@ -82,7 +82,6 @@ public class AssignmentController {
 		+"\r\n"+"EndDate : "+subject.getEndDate());
 		javaMailSender.send(msg);
 	}
-	System.out.println(listInt.toString());
     return new RedirectView("/assignment/subject/" + subject.getId());
   }
 }

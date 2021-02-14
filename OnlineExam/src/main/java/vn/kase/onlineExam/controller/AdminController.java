@@ -34,14 +34,31 @@ int valueFind=0;
 	}
 @PostMapping("/saveOrUpdate")
 	public String save(ModelMap model, User user) {
-	String message = "New user inserted!";
-	if(user.getId() != null && user.getId() >0) {
-		message = "User Updated!";
-	}
-			userService.save(user);
-			model.addAttribute(user);
-			model.addAttribute("message", message);
-			return "admin/createOrEdit";
+		if (user.getId() == null) {
+			String message1;
+			User checkUser = userService.findByEmail(user.getEmail());
+			if (checkUser != null) {
+				message1 = "*Email already exist!";
+				model.addAttribute("message1", message1);
+				return "admin/createOrEdit";
+			}
+			checkUser = userService.findByUsername(user.getUsername());
+			if (checkUser != null) {
+				message1 = "*Username already exist!";
+				model.addAttribute("message1", message1);
+				return "admin/createOrEdit";
+			}
+		}
+		String message = "New user inserted!";
+		if (user.getId() != null && user.getId() > 0) {
+			message = "User Updated!";
+		}
+		MD5 md5 = new MD5();
+		user.setPass(md5.getMd5(user.getPass()));
+		userService.save(user);
+		model.addAttribute(user);
+		model.addAttribute("message", message);
+		return "admin/createOrEdit";
 	}
 
 @GetMapping("/edit/{id}")
@@ -59,7 +76,14 @@ public String edit(ModelMap model, @PathVariable(name="id") Integer id) {
 
 @GetMapping("/delete/{id}")
 public String delete(ModelMap model,@PathVariable(name="id") Integer id) {
-	userService.deleteById(id);
+	String message;
+	try {
+		userService.deleteById(id);
+	} catch (Exception e) {
+		message = "This student was assigned!";
+		model.addAttribute("message",message);
+	}
+	
 	return managerUsers(model,valueFind);
 }
 

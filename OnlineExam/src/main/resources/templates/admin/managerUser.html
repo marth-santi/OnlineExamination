@@ -24,6 +24,9 @@
 	          <option value=3>Student</option>
 	        </select>
 	          <input type="submit" value="Search" style="display: inline-block;" class="btn btn-info" /> 
+	          <div th:if="${message != null}" style="float: right;color: red">
+	          <span th:text="${message}" ></span>
+	          </div>
           </form>
           </div>
           </caption>
