@@ -3,8 +3,17 @@ import React, { useEffect, useState } from "react";
 import CONSTANT from "CONST";
 import { IExam, IQuestion, IQuestionResponse } from "models/ExamModels";
 import API from "customModules/APIRequest";
+import { Button, Grid, makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles({
+  actionGroup: {
+    marginBottom: 20,
+  },
+  submitButton: {},
+});
 
 function ExamView() {
+  const classes = useStyles();
   const [questionResponses, setResponses] = useState<IQuestionResponse[]>();
   // Get questions of Exam
   useEffect(() => {
@@ -23,18 +32,35 @@ function ExamView() {
       let newResponses: IQuestionResponse[];
       newResponses = prevResponses;
       newResponses[response.id - 1] = response;
-      console.log("Changed response", newResponses);
       return newResponses;
+    });
+  };
+
+  // Handle Submit exam
+  const handleSubmit = () => {
+    console.log("Exam submit: ", questionResponses);
+    API.postString<IQuestionResponse[]>(
+      CONSTANT.API.submitExam,
+      questionResponses!
+    ).then((res: string) => {
+      console.log(res);
     });
   };
 
   return questionResponses ? (
     <>
-      {" "}
+      <Grid className={classes.actionGroup}>
+        <Button
+          variant="contained"
+          color="secondary"
+          className={classes.submitButton}
+          onClick={handleSubmit}
+        >
+          Submit Exam
+        </Button>
+      </Grid>
       {questionResponses.map((question) => (
-        <div className="App">
-          <Question {...question} updateResponse={updateResponse}></Question>
-        </div>
+        <Question {...question} updateResponse={updateResponse}></Question>
       ))}
     </>
   ) : (

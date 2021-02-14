@@ -16,6 +16,9 @@ import vn.kase.onlineExam.model.QuestionResponse;
 import vn.kase.onlineExam.model.Subject;
 import vn.kase.onlineExam.services.QuestionService;
 import vn.kase.onlineExam.services.SubjectService;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 @RequestMapping("/api/students")
@@ -41,4 +44,12 @@ public class StudentAPIController {
     }
     return qResponseList;
   }
+
+  @PostMapping(value="/submitExam")
+  public String submitExam(@RequestBody List<QuestionResponse> listResponse) {
+      System.out.println(listResponse.toString());
+      
+      return "Success" + listResponse.get(0).toString();
+  }
+  
 }
