@@ -13,8 +13,11 @@ import {
   AccordionSummary,
   FormControlLabel,
   makeStyles,
+  Radio,
+  RadioGroup,
 } from "@material-ui/core";
 import { lightBlue, green } from "@material-ui/core/colors";
+import { JsxEmit } from "typescript";
 
 const useStyles = makeStyles({
   root: {
@@ -33,11 +36,154 @@ const useStyles = makeStyles({
     paddingLeft: 10,
     textAlign: "left",
   },
-  option: {},
+  option: {
+    minWidth: 200,
+  },
 });
 
 function Question(props: IQuestion): ReactElement {
   const classes = useStyles();
+  const [selectedSingleValue, setSelectedSingleValue] = React.useState("0");
+  const [selectedMultipleValue, setSelectedMultipleValue] = React.useState({
+    selectedOp1: false,
+    selectedOp2: false,
+    selectedOp3: false,
+    selectedOp4: false,
+  });
+
+  const handleSingleChoice = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedSingleValue(event.target.value);
+  };
+
+  const handleMultipleChoice = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedMultipleValue({
+      ...selectedMultipleValue,
+      [event.target.name]: event.target.checked,
+    });
+  };
+
+  const renderQuestion = (): JSX.Element => {
+    if (props.isMultiple)
+      // Multiple Choice Question
+      return (
+        <AccordionDetails>
+          <FormControl component="fieldset" className={classes.formControl}>
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    name="selectedOp1"
+                    color="primary"
+                    checked={selectedMultipleValue.selectedOp1}
+                    onChange={handleMultipleChoice}
+                  />
+                }
+                label={props.op1}
+                className={classes.option}
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    name="selectedOp2"
+                    color="primary"
+                    checked={selectedMultipleValue.selectedOp2}
+                    onChange={handleMultipleChoice}
+                  />
+                }
+                label={props.op2}
+                className={classes.option}
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    name="selectedOp3"
+                    color="primary"
+                    checked={selectedMultipleValue.selectedOp3}
+                    onChange={handleMultipleChoice}
+                  />
+                }
+                label={props.op3}
+                className={classes.option}
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    name="selectedOp4"
+                    color="primary"
+                    checked={selectedMultipleValue.selectedOp4}
+                    onChange={handleMultipleChoice}
+                  />
+                }
+                label={props.op4}
+                className={classes.option}
+              />
+            </FormGroup>
+          </FormControl>
+        </AccordionDetails>
+      );
+
+    // Single Choice Question
+    return (
+      <AccordionDetails>
+        <FormControl component="fieldset" className={classes.formControl}>
+          <RadioGroup>
+            <FormControlLabel
+              control={
+                <Radio
+                  name="op1"
+                  color="primary"
+                  value="1"
+                  checked={selectedSingleValue === "1"}
+                  onChange={handleSingleChoice}
+                />
+              }
+              label={props.op1}
+              className={classes.option}
+            />
+            <FormControlLabel
+              control={
+                <Radio
+                  name="op2"
+                  color="primary"
+                  value="2"
+                  checked={selectedSingleValue === "2"}
+                  onChange={handleSingleChoice}
+                />
+              }
+              label={props.op2}
+              className={classes.option}
+            />
+            <FormControlLabel
+              control={
+                <Radio
+                  name="op3"
+                  color="primary"
+                  value="3"
+                  checked={selectedSingleValue === "3"}
+                  onChange={handleSingleChoice}
+                />
+              }
+              label={props.op3}
+              className={classes.option}
+            />
+            <FormControlLabel
+              control={
+                <Radio
+                  name="op4"
+                  color="primary"
+                  value="4"
+                  checked={selectedSingleValue === "4"}
+                  onChange={handleSingleChoice}
+                />
+              }
+              label={props.op4}
+              className={classes.option}
+            />
+          </RadioGroup>
+        </FormControl>
+      </AccordionDetails>
+    );
+  };
 
   return (
     <>
@@ -47,32 +193,7 @@ function Question(props: IQuestion): ReactElement {
             <Typography> Question {props.id} :</Typography> {props.question}
           </Typography>
         </AccordionSummary>
-        <AccordionDetails>
-          <FormControl component="fieldset" className={classes.formControl}>
-            <FormGroup>
-              <FormControlLabel
-                control={<Checkbox name="op1" color="primary" />}
-                label={props.op1}
-                className={classes.option}
-              />
-              <FormControlLabel
-                control={<Checkbox name="op2" color="primary" />}
-                label={props.op2}
-                className={classes.option}
-              />
-              <FormControlLabel
-                control={<Checkbox name="op3" color="primary" />}
-                label={props.op3}
-                className={classes.option}
-              />
-              <FormControlLabel
-                control={<Checkbox name="op4" color="primary" />}
-                label={props.op4}
-                className={classes.option}
-              />
-            </FormGroup>
-          </FormControl>
-        </AccordionDetails>
+        {renderQuestion()}
       </Accordion>
       <br />
     </>

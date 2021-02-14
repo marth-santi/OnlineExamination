@@ -5,7 +5,7 @@ export interface IQuestion {
   op2: string;
   op3: string;
   op4: string;
-  answer: string;
+  isMultiple: boolean;
   subjectId: number;
 }
 
