@@ -4,6 +4,7 @@ import CONSTANT from "CONST";
 import { IQuestionResponse } from "models/ExamModels";
 import API from "customModules/APIRequest";
 import { Button, Grid, makeStyles } from "@material-ui/core";
+import { Mark } from "models/Mark";
 
 const useStyles = makeStyles({
   actionGroup: {
@@ -39,10 +40,10 @@ function ExamView() {
   // Handle Submit exam
   const handleSubmit = () => {
     console.log("Exam submit: ", questionResponses);
-    API.postJSON<IQuestionResponse[], any>(
+    API.postJSON<IQuestionResponse[], Mark>(
       CONSTANT.API.submitExam,
       questionResponses!
-    ).then((res: any) => {
+    ).then((res: Mark) => {
       console.log(res);
     });
   };

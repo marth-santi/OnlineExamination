@@ -42,6 +42,4 @@ public class Mark implements Serializable {
   @Column(name="test_date")
   @DateTimeFormat(pattern = "MM/dd/yyyy")
   private Date testDate;
-  
-  private Subject subject;
 }

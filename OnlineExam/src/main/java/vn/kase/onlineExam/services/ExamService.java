@@ -73,6 +73,6 @@ public class ExamService {
 		Integer mark = correct * 100 / total;
 		return new Mark()
 				.setMarks(mark)
-				.setSubject(examResponse.getSubject());
+				.setSubjectId(examResponse.getSubject().getId());
 	}
 }

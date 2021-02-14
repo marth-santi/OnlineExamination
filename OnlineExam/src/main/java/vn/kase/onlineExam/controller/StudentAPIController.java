@@ -1,5 +1,6 @@
 package vn.kase.onlineExam.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +63,7 @@ public class StudentAPIController {
     // Exam service to mark the response
     Mark mark = examService.markResponse(examResponse);
     mark.setStudentId(student.getId());
+    mark.setTestDate(new Date(new java.util.Date().getTime()));
 
     // Student service to save mark
       
