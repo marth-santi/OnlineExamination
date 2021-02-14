@@ -19,6 +19,7 @@ import vn.kase.onlineExam.model.Subject;
 import vn.kase.onlineExam.model.User;
 import vn.kase.onlineExam.services.ExamService;
 import vn.kase.onlineExam.services.QuestionService;
+import vn.kase.onlineExam.services.StudentService;
 import vn.kase.onlineExam.services.SubjectService;
 import vn.kase.onlineExam.viewModel.ExamResponse;
 
@@ -35,6 +36,9 @@ public class StudentAPIController {
   QuestionService questionService;
   @Autowired
   ExamService examService;
+
+  @Autowired
+  StudentService studentService;
 
   @GetMapping("/test")
   public String testAPI() {
@@ -66,8 +70,9 @@ public class StudentAPIController {
     mark.setTestDate(new Date(new java.util.Date().getTime()));
 
     // Student service to save mark
+    Boolean result = studentService.saveMark(mark);
       
-    return mark;
+    return result ? mark : null;
   }
   
 }

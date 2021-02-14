@@ -60,11 +60,8 @@ public class StudentController {
 		List<Mark> listMarks = markService.findAllByStudentId(user.getId());
 		for (Mark mark : listMarks) {
 			Subject subject = subjectService.findById(mark.getSubjectId()).get();
-			mark.setSubject(subject);
-			/*
-			 * if(mark.getSubject().getEndDate().compareTo(new Date())<0); {
-			 * mark.setMarks(0); markService.save(mark); }
-			 */
+			mark.setSubject(subject);			
+			
 		}
 		model.addAttribute("listMarks", listMarks);
 		return "students/results";

@@ -33,7 +33,7 @@
               <td th:text="${mark.marks}"></td>
               <td th:text="${mark.testDate}"></td>
               <td th:unless="${mark.marks != null}"></td>
-              <td th:if="${mark.marks != null}" th:text="${mark.marks >=4?'Pass':'Fail'}" style="font-weight: bold;"></td>
+              <td th:if="${mark.marks != null}" th:text="${mark.marks >=45?'Pass':'Fail'}" style="font-weight: bold;"></td>
             </tr>
           </tbody>
         </table>
