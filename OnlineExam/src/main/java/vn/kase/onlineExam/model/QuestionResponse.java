@@ -2,6 +2,7 @@ package vn.kase.onlineExam.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.Accessors;
@@ -11,6 +12,7 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @Accessors(chain = true)
 @ToString(callSuper = true)
+@EqualsAndHashCode(callSuper=false)
 public class QuestionResponse extends Question{
   /**
 	 *
@@ -27,8 +29,40 @@ public class QuestionResponse extends Question{
     if (this.answer.length() > 1)
       this.isMultiple = true;
 
-    this.setAnswer("");   
+    this.setAnswer("");
+
+  }
   
+  public Boolean checkAnswer(String correctAnswer) {
+    char[] studentChoices = getStudentResponse();
+    // If no answer => false
+    if (studentChoices.length == 0)
+      return false;
+
+    char[] correctChoices = correctAnswer.toCharArray();
+    // Choice less or more than correct
+    if (correctChoices.length != studentChoices.length)
+      return false;
+    // Student choices number equals Correct choices => check each choice
+    for (char s : studentChoices) {
+      if (!correctAnswer.contains(String.valueOf(s)))
+        return false;
+    }
+    return true;
+  }
+  
+  private char[] getStudentResponse() {
+    String response = "";
+    if (isCheckedOp1)
+      response = response + "1";
+    if (isCheckedOp2)
+      response = response + "2";
+    if (isCheckedOp3)
+      response = response + "3";
+    if (isCheckedOp4)
+      response = response + "4";
+
+    return response.toCharArray();
   }
   
 }

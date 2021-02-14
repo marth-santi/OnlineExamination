@@ -1,8 +1,5 @@
 import React, { ReactElement, useEffect } from "react";
 import { IQuestion, IQuestionResponse } from "models/ExamModels";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
 import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
@@ -17,7 +14,6 @@ import {
   RadioGroup,
 } from "@material-ui/core";
 import { lightBlue, green } from "@material-ui/core/colors";
-import { JsxEmit } from "typescript";
 
 const useStyles = makeStyles({
   root: {

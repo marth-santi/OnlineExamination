@@ -15,12 +15,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 @Data
 @IdClass(MarkId.class)
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@Accessors(chain=true)
 @Entity
 @Table(name = "tb_marks")
 public class Mark implements Serializable {

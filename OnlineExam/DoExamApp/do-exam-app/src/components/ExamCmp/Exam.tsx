@@ -1,7 +1,7 @@
 import Question from "components/QuestionCmp/Question";
 import React, { useEffect, useState } from "react";
 import CONSTANT from "CONST";
-import { IExam, IQuestion, IQuestionResponse } from "models/ExamModels";
+import { IQuestionResponse } from "models/ExamModels";
 import API from "customModules/APIRequest";
 import { Button, Grid, makeStyles } from "@material-ui/core";
 
@@ -39,10 +39,10 @@ function ExamView() {
   // Handle Submit exam
   const handleSubmit = () => {
     console.log("Exam submit: ", questionResponses);
-    API.postString<IQuestionResponse[]>(
+    API.postJSON<IQuestionResponse[], any>(
       CONSTANT.API.submitExam,
       questionResponses!
-    ).then((res: string) => {
+    ).then((res: any) => {
       console.log(res);
     });
   };

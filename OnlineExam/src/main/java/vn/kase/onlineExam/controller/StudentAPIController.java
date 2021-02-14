@@ -11,11 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import vn.kase.onlineExam.model.Mark;
 import vn.kase.onlineExam.model.Question;
 import vn.kase.onlineExam.model.QuestionResponse;
 import vn.kase.onlineExam.model.Subject;
+import vn.kase.onlineExam.model.User;
+import vn.kase.onlineExam.services.ExamService;
 import vn.kase.onlineExam.services.QuestionService;
 import vn.kase.onlineExam.services.SubjectService;
+import vn.kase.onlineExam.viewModel.ExamResponse;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -26,7 +31,9 @@ public class StudentAPIController {
 	@Autowired
 	SubjectService subjectService;
 	@Autowired
-	QuestionService questionService;
+  QuestionService questionService;
+  @Autowired
+  ExamService examService;
 
   @GetMapping("/test")
   public String testAPI() {
@@ -46,10 +53,19 @@ public class StudentAPIController {
   }
 
   @PostMapping(value="/submitExam")
-  public String submitExam(@RequestBody List<QuestionResponse> listResponse) {
-      System.out.println(listResponse.toString());
+  public Mark submitExam(HttpServletRequest request, @RequestBody List<QuestionResponse> listResponse) {
+    User student = (User)request.getSession().getAttribute("student");
+    // Get current subject taken
+    Subject subject = (Subject) request.getSession().getAttribute("subject");
+    ExamResponse examResponse = new ExamResponse(subject, listResponse);
+
+    // Exam service to mark the response
+    Mark mark = examService.markResponse(examResponse);
+    mark.setStudentId(student.getId());
+
+    // Student service to save mark
       
-      return "Success" + listResponse.get(0).toString();
+    return mark;
   }
   
 }
