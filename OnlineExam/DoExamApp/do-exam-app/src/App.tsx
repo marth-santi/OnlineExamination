@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import Exam from "components/ExamCmp/Exam";
+import ExamView from "components/ExamCmp/Exam";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 
 const theme = createMuiTheme({
@@ -25,7 +25,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-        <Exam></Exam>
+        <ExamView></ExamView>
       </div>
     </ThemeProvider>
   );

@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect } from "react";
 import { IQuestion, IQuestionResponse } from "models/ExamModels";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -41,18 +41,34 @@ const useStyles = makeStyles({
   },
 });
 
-function Question(props: IQuestion): ReactElement {
+interface Props extends IQuestion {
+  updateResponse: (response: IQuestionResponse) => void;
+}
+
+function Question(props: Props): ReactElement {
   const classes = useStyles();
-  const [selectedSingleValue, setSelectedSingleValue] = React.useState("0");
-  const [selectedMultipleValue, setSelectedMultipleValue] = React.useState({
-    selectedOp1: false,
-    selectedOp2: false,
-    selectedOp3: false,
-    selectedOp4: false,
-  });
+  const initValueSelected = {
+    isCheckedOp1: false,
+    isCheckedOp2: false,
+    isCheckedOp3: false,
+    isCheckedOp4: false,
+  };
+  const [selectedSingleValue, setSelectedSingleValue] = React.useState(
+    initValueSelected
+  );
+  const [selectedMultipleValue, setSelectedMultipleValue] = React.useState(
+    initValueSelected
+  );
+  // Update response up to Exam
+  useEffect(() => {
+    onResponseChange();
+  }, [selectedSingleValue, selectedMultipleValue]);
 
   const handleSingleChoice = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedSingleValue(event.target.value);
+    setSelectedSingleValue({
+      ...initValueSelected,
+      [event.target.name]: event.target.checked,
+    });
   };
 
   const handleMultipleChoice = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,6 +76,19 @@ function Question(props: IQuestion): ReactElement {
       ...selectedMultipleValue,
       [event.target.name]: event.target.checked,
     });
+  };
+
+  const onResponseChange = () => {
+    let response: IQuestionResponse;
+    // Assign Single value choice by Default
+    response = {
+      ...props,
+      ...selectedSingleValue,
+    };
+
+    // If this question is Multiple choice, update the response with Correct variable (contains multiple selection)
+    if (props.isMultiple) response = { ...response, ...selectedMultipleValue };
+    props.updateResponse(response);
   };
 
   const renderQuestion = (): JSX.Element => {
@@ -72,9 +101,9 @@ function Question(props: IQuestion): ReactElement {
               <FormControlLabel
                 control={
                   <Checkbox
-                    name="selectedOp1"
+                    name="isCheckedOp1"
                     color="primary"
-                    checked={selectedMultipleValue.selectedOp1}
+                    checked={selectedMultipleValue.isCheckedOp1}
                     onChange={handleMultipleChoice}
                   />
                 }
@@ -84,9 +113,9 @@ function Question(props: IQuestion): ReactElement {
               <FormControlLabel
                 control={
                   <Checkbox
-                    name="selectedOp2"
+                    name="isCheckedOp2"
                     color="primary"
-                    checked={selectedMultipleValue.selectedOp2}
+                    checked={selectedMultipleValue.isCheckedOp2}
                     onChange={handleMultipleChoice}
                   />
                 }
@@ -96,9 +125,9 @@ function Question(props: IQuestion): ReactElement {
               <FormControlLabel
                 control={
                   <Checkbox
-                    name="selectedOp3"
+                    name="isCheckedOp3"
                     color="primary"
-                    checked={selectedMultipleValue.selectedOp3}
+                    checked={selectedMultipleValue.isCheckedOp3}
                     onChange={handleMultipleChoice}
                   />
                 }
@@ -108,9 +137,9 @@ function Question(props: IQuestion): ReactElement {
               <FormControlLabel
                 control={
                   <Checkbox
-                    name="selectedOp4"
+                    name="isCheckedOp4"
                     color="primary"
-                    checked={selectedMultipleValue.selectedOp4}
+                    checked={selectedMultipleValue.isCheckedOp4}
                     onChange={handleMultipleChoice}
                   />
                 }
@@ -130,10 +159,10 @@ function Question(props: IQuestion): ReactElement {
             <FormControlLabel
               control={
                 <Radio
-                  name="op1"
+                  name="isCheckedOp1"
                   color="primary"
                   value="1"
-                  checked={selectedSingleValue === "1"}
+                  checked={selectedSingleValue.isCheckedOp1}
                   onChange={handleSingleChoice}
                 />
               }
@@ -143,10 +172,10 @@ function Question(props: IQuestion): ReactElement {
             <FormControlLabel
               control={
                 <Radio
-                  name="op2"
+                  name="isCheckedOp2"
                   color="primary"
                   value="2"
-                  checked={selectedSingleValue === "2"}
+                  checked={selectedSingleValue.isCheckedOp2}
                   onChange={handleSingleChoice}
                 />
               }
@@ -156,10 +185,10 @@ function Question(props: IQuestion): ReactElement {
             <FormControlLabel
               control={
                 <Radio
-                  name="op3"
+                  name="isCheckedOp3"
                   color="primary"
                   value="3"
-                  checked={selectedSingleValue === "3"}
+                  checked={selectedSingleValue.isCheckedOp3}
                   onChange={handleSingleChoice}
                 />
               }
@@ -169,10 +198,10 @@ function Question(props: IQuestion): ReactElement {
             <FormControlLabel
               control={
                 <Radio
-                  name="op4"
+                  name="isCheckedOp4"
                   color="primary"
                   value="4"
-                  checked={selectedSingleValue === "4"}
+                  checked={selectedSingleValue.isCheckedOp4}
                   onChange={handleSingleChoice}
                 />
               }
@@ -185,6 +214,7 @@ function Question(props: IQuestion): ReactElement {
     );
   };
 
+  // ==== Final return element ====
   return (
     <>
       <Accordion className={classes.root}>

@@ -1,29 +1,39 @@
 import Question from "components/QuestionCmp/Question";
 import React, { useEffect, useState } from "react";
 import CONSTANT from "CONST";
-import { IExam } from "models/ExamModels";
+import { IExam, IQuestion, IQuestionResponse } from "models/ExamModels";
+import API from "customModules/APIRequest";
 
-function Exam() {
-  const [questions, setQuestions] = useState<IExam | null>(null);
+function ExamView() {
+  const [questionResponses, setResponses] = useState<IQuestionResponse[]>();
   // Get questions of Exam
   useEffect(() => {
-    fetch(CONSTANT.API.getExam)
-      .then(
-        async (res: Response): Promise<IExam> => {
-          return res.json();
-        }
-      )
-      .then((exam: IExam): void => {
-        console.log(exam);
-        setQuestions(exam);
-      });
+    API.get<IQuestionResponse[]>(CONSTANT.API.getExam).then(
+      (exam: IQuestionResponse[]): void => {
+        setResponses(exam);
+      }
+    );
   }, []);
 
-  return questions ? (
-    <> {
-      questions.map((question) => (
+  // Handle change from question response, reload questions
+  const updateResponse = (response: IQuestionResponse): void => {
+    setResponses((prevResponses) => {
+      if (!prevResponses) return;
+
+      let newResponses: IQuestionResponse[];
+      newResponses = prevResponses;
+      newResponses[response.id - 1] = response;
+      console.log("Changed response", newResponses);
+      return newResponses;
+    });
+  };
+
+  return questionResponses ? (
+    <>
+      {" "}
+      {questionResponses.map((question) => (
         <div className="App">
-          <Question {...question}></Question>
+          <Question {...question} updateResponse={updateResponse}></Question>
         </div>
       ))}
     </>
@@ -32,4 +42,4 @@ function Exam() {
   );
 }
 
-export default Exam;
+export default ExamView;
