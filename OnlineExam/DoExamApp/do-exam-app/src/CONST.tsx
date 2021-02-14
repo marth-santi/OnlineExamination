@@ -5,6 +5,9 @@ const CONST = {
     getExam: `${BASE_URL}/api/students/getExam`,
     submitExam: `${BASE_URL}/api/students/submitExam`,
   },
+  VIEW: {
+    ResultPage: `${BASE_URL}/students/results`,
+  },
 };
 
 export default CONST;

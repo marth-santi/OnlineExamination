@@ -3,7 +3,16 @@ import React, { useEffect, useState } from "react";
 import CONSTANT from "CONST";
 import { IQuestionResponse } from "models/ExamModels";
 import API from "customModules/APIRequest";
-import { Button, Grid, makeStyles } from "@material-ui/core";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Grid,
+  makeStyles,
+} from "@material-ui/core";
 import { Mark } from "models/Mark";
 
 const useStyles = makeStyles({
@@ -45,8 +54,27 @@ function ExamView() {
       questionResponses!
     ).then((res: Mark) => {
       console.log(res);
+      setTimeout(() => {
+        setOpenSubmittedAlert(true);
+        window.location.href = CONSTANT.VIEW.ResultPage;
+      }, 2000);
     });
   };
+
+  // Dialog Submit handling
+  const [openConfirmSubmit, setOpenSubmitDlg] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpenSubmitDlg(true);
+  };
+
+  const handleClose = () => {
+    setOpenSubmitDlg(false);
+  };
+  // =====
+
+  // Dialog submitted info
+  const [openSummittedDlg, setOpenSubmittedAlert] = React.useState(false);
 
   return questionResponses ? (
     <>
@@ -55,7 +83,7 @@ function ExamView() {
           variant="contained"
           color="secondary"
           className={classes.submitButton}
-          onClick={handleSubmit}
+          onClick={handleClickOpen}
         >
           Submit Exam
         </Button>
@@ -63,6 +91,29 @@ function ExamView() {
       {questionResponses.map((question) => (
         <Question {...question} updateResponse={updateResponse}></Question>
       ))}
+      <Dialog
+        open={openConfirmSubmit}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Submit exam ?"}</DialogTitle>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleSubmit} color="secondary" autoFocus>
+            Confirm
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={openSummittedDlg}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle>{"Exam submitted. Please wait..."}</DialogTitle>
+      </Dialog>
     </>
   ) : (
     <>This Exam has no question</>
