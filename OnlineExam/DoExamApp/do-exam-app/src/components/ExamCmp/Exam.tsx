@@ -14,6 +14,7 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import { Mark } from "models/Mark";
+import Countdown from "components/Countdown/Countdown";
 
 const useStyles = makeStyles({
   actionGroup: {
@@ -79,6 +80,13 @@ function ExamView() {
   return questionResponses ? (
     <>
       <Grid className={classes.actionGroup}>
+        <Countdown
+          minutes={0}
+          seconds={5}
+          action={() => {
+            alert("Times up!!!");
+          }}
+        />
         <Button
           variant="contained"
           color="secondary"
