@@ -67,15 +67,16 @@ function ExamView() {
   // Handle Submit exam
   const handleSubmit = () => {
     console.log("Exam submit: ", questionResponses);
+    setOpenSubmitDlg(false);
+    setOpenSubmittedAlert(true);
     API.postJSON<IQuestionResponse[], Mark>(
       CONSTANT.API.submitExam,
       questionResponses!
     ).then((res: Mark) => {
       console.log(res);
       setTimeout(() => {
-        setOpenSubmittedAlert(true);
         window.location.href = CONSTANT.VIEW.ResultPage;
-      }, 2000);
+      }, 1000);
     });
   };
 
@@ -131,7 +132,10 @@ function ExamView() {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <CircularProgress color="inherit"></CircularProgress>
+        <CircularProgress
+          style={{ color: "green" }}
+          size={200}
+        ></CircularProgress>
       </Backdrop>
     </>
   ) : (
