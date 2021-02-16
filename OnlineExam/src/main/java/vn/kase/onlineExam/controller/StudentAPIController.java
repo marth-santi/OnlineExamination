@@ -48,14 +48,16 @@ public class StudentAPIController {
 
   @GetMapping("/getExam")
   @ResponseBody
-  public Object getExam(HttpServletRequest request) {
+  public ExamResponse getExam(HttpServletRequest request) {
     Subject subject =(Subject) request.getSession().getAttribute("subject");
     List<Question> listQuestion = questionService.findAllBySubjectId(subject.getId());
     List<QuestionResponse> qResponseList = new ArrayList<QuestionResponse>();
     for (Question q : listQuestion) {
       qResponseList.add(new QuestionResponse(q));
     }
-    return qResponseList;
+
+    ExamResponse examResponse = new ExamResponse(subject, qResponseList);
+    return examResponse;
   }
 
   @PostMapping(value="/submitExam")

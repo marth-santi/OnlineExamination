@@ -16,4 +16,17 @@ export interface IQuestionResponse extends IQuestion {
   isCheckedOp4: boolean;
 }
 
+export type ISubject = {
+  id: number;
+  subjectName: string;
+  startDate: Date;
+  endDate: Date;
+  time: number;
+};
+
 export type IExam = Array<IQuestion>;
+
+export type IExamResponse = {
+  subject: ISubject;
+  responses: Array<IQuestionResponse>;
+};

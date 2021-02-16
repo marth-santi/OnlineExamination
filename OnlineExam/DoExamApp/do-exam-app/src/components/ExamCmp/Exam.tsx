@@ -1,7 +1,7 @@
 import Question from "components/QuestionCmp/Question";
 import React, { useEffect, useState } from "react";
 import CONSTANT from "CONST";
-import { IQuestionResponse } from "models/ExamModels";
+import { IExamResponse, IQuestionResponse } from "models/ExamModels";
 import API from "customModules/APIRequest";
 import {
   Backdrop,
@@ -30,9 +30,10 @@ function ExamView() {
   const [questionResponses, setResponses] = useState<IQuestionResponse[]>();
   // Get questions of Exam
   useEffect(() => {
-    API.get<IQuestionResponse[]>(CONSTANT.API.getExam).then(
-      (exam: IQuestionResponse[]): void => {
-        setResponses(exam);
+    API.get<IExamResponse>(CONSTANT.API.getExam).then(
+      (exam: IExamResponse): void => {
+        setResponses(exam.responses);
+        console.log(exam.subject);
       }
     );
   }, []);

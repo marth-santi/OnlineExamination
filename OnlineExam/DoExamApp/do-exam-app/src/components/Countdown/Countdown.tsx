@@ -1,4 +1,4 @@
-import { Fab, makeStyles, Paper } from "@material-ui/core";
+import { Box, Fab, makeStyles, Paper, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 
 type Props = {
@@ -23,6 +23,8 @@ const useStyles = makeStyles({
     position: "fixed",
     zIndex: 9999,
   },
+  minute: {},
+  second: {},
 });
 
 function Countdown(props: Props) {
@@ -65,8 +67,10 @@ function Countdown(props: Props) {
 
   return (
     <Paper className={classes.clock} elevation={5}>
-      <Paper>Minute: {state.remainingMinute}</Paper>
-      <Paper>Second: {state.remainingSecond}</Paper>
+      <Box fontWeight={500}>Remaining Time</Box>
+      <Typography>
+        {state.remainingMinute} : {state.remainingSecond}
+      </Typography>
     </Paper>
   );
 }
