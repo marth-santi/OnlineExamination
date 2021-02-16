@@ -82,16 +82,14 @@ function ExamView() {
   return questionResponses ? (
     <>
       <Countdown minutes={1} action={handleSubmit} />
-      <Grid className={classes.actionGroup}>
-        <Button
-          variant="contained"
-          color="secondary"
-          className={classes.submitButton}
-          onClick={handleClickOpen}
-        >
-          Submit Exam
-        </Button>
-      </Grid>
+      <Button
+        variant="contained"
+        color="secondary"
+        className={classes.submitButton}
+        onClick={handleClickOpen}
+      >
+        Submit Exam
+      </Button>
       {questionResponses.map((question) => (
         <Question {...question} updateResponse={updateResponse}></Question>
       ))}
