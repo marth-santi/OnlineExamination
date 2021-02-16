@@ -4,7 +4,9 @@ import CONSTANT from "CONST";
 import { IQuestionResponse } from "models/ExamModels";
 import API from "customModules/APIRequest";
 import {
+  Backdrop,
   Button,
+  CircularProgress,
   Dialog,
   DialogActions,
   DialogContent,
@@ -79,14 +81,8 @@ function ExamView() {
 
   return questionResponses ? (
     <>
+      <Countdown minutes={1} action={handleSubmit} />
       <Grid className={classes.actionGroup}>
-        <Countdown
-          minutes={0}
-          seconds={5}
-          action={() => {
-            alert("Times up!!!");
-          }}
-        />
         <Button
           variant="contained"
           color="secondary"
@@ -115,13 +111,13 @@ function ExamView() {
           </Button>
         </DialogActions>
       </Dialog>
-      <Dialog
+      <Backdrop
         open={openSummittedDlg}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle>{"Exam submitted. Please wait..."}</DialogTitle>
-      </Dialog>
+        <CircularProgress color="inherit"></CircularProgress>
+      </Backdrop>
     </>
   ) : (
     <>This Exam has no question</>

@@ -1,4 +1,4 @@
-import { Box } from "@material-ui/core";
+import { Fab, Paper } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 
 type Props = {
@@ -28,10 +28,10 @@ function Countdown(props: Props) {
     newState.remainingSecond--;
     if (newState.remainingSecond === 0 && newState.remainingMinute === 0) {
       if (!isTimeOver) setTimeOver(true);
-    } else if (newState.remainingSecond < 0) {
+    }
+    if (newState.remainingSecond < 0) {
       newState.remainingSecond = 59;
       newState.remainingMinute--;
-      return { remainingMinute: 0, remainingSecond: 0 };
     }
     return newState;
   }
@@ -46,10 +46,10 @@ function Countdown(props: Props) {
   }, []);
 
   return (
-    <>
-      <Box>Minute: {state.remainingMinute}</Box>
-      <Box>Second: {state.remainingSecond}</Box>
-    </>
+    <Fab variant="extended" color="secondary">
+      <Paper>Minute: {state.remainingMinute}</Paper>
+      <Paper>Second: {state.remainingSecond}</Paper>
+    </Fab>
   );
 }
 
