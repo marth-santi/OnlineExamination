@@ -66,12 +66,12 @@ function Countdown(props: Props) {
   }, []);
 
   return (
-    <Paper className={classes.clock} elevation={5}>
+    <>
       <Box fontWeight={500}>Remaining Time</Box>
       <Typography>
         {state.remainingMinute} : {state.remainingSecond}
       </Typography>
-    </Paper>
+    </>
   );
 }
 

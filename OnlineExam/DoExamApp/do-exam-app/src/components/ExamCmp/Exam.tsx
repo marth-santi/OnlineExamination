@@ -1,7 +1,7 @@
 import Question from "components/QuestionCmp/Question";
 import React, { useEffect, useState } from "react";
 import CONSTANT from "CONST";
-import { IExamResponse, IQuestionResponse } from "models/ExamModels";
+import { IExamResponse, IQuestionResponse, ISubject } from "models/ExamModels";
 import API from "customModules/APIRequest";
 import {
   Backdrop,
@@ -14,6 +14,7 @@ import {
   DialogTitle,
   Grid,
   makeStyles,
+  Paper,
 } from "@material-ui/core";
 import { Mark } from "models/Mark";
 import Countdown from "components/Countdown/Countdown";
@@ -22,18 +23,31 @@ const useStyles = makeStyles({
   actionGroup: {
     marginBottom: 20,
   },
-  submitButton: {},
+  submitButton: {
+    marginTop: 5,
+  },
+  clock: {
+    margin: 10,
+    padding: 10,
+    top: "auto",
+    right: 20,
+    bottom: 20,
+    left: "auto",
+    position: "fixed",
+    zIndex: 9999,
+  },
 });
 
 function ExamView() {
   const classes = useStyles();
+  const [subject, setSubject] = useState<ISubject>();
   const [questionResponses, setResponses] = useState<IQuestionResponse[]>();
   // Get questions of Exam
   useEffect(() => {
     API.get<IExamResponse>(CONSTANT.API.getExam).then(
       (exam: IExamResponse): void => {
         setResponses(exam.responses);
-        console.log(exam.subject);
+        setSubject(exam.subject);
       }
     );
   }, []);
@@ -80,17 +94,19 @@ function ExamView() {
   // Dialog submitted info
   const [openSummittedDlg, setOpenSubmittedAlert] = React.useState(false);
 
-  return questionResponses ? (
+  return questionResponses && subject ? (
     <>
-      <Countdown minutes={1} action={handleSubmit} />
-      <Button
-        variant="contained"
-        color="secondary"
-        className={classes.submitButton}
-        onClick={handleClickOpen}
-      >
-        Submit Exam
-      </Button>
+      <Paper className={classes.clock} elevation={5}>
+        <Countdown minutes={subject!.time} action={handleSubmit} />
+        <Button
+          variant="contained"
+          color="secondary"
+          className={classes.submitButton}
+          onClick={handleClickOpen}
+        >
+          Submit Exam
+        </Button>
+      </Paper>
       {questionResponses.map((question) => (
         <Question {...question} updateResponse={updateResponse}></Question>
       ))}
