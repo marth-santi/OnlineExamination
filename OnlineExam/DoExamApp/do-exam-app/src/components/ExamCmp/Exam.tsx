@@ -59,7 +59,7 @@ function ExamView() {
 
       let newResponses: IQuestionResponse[];
       newResponses = prevResponses;
-      newResponses[response.id - 1] = response;
+      newResponses[prevResponses.indexOf(response)] = response;
       return newResponses;
     });
   };
