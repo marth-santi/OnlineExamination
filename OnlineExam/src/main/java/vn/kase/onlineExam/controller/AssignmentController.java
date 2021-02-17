@@ -31,10 +31,6 @@ public class AssignmentController {
 
 	@Autowired
   private SubjectRepository subjectRepo;
-	@Autowired
-  private UserRepository userRepo;
-  @Autowired
-  private MarkRepository markRepo;
   @Autowired
   private StudentService studentService;
   @Autowired

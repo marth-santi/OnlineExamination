@@ -48,7 +48,6 @@
           </div>
           <div
             th:if="${#fields.hasErrors('subject.startDate')}"
-            th:errors="*{subject.startDate}"
             class="alert alert-danger"
           >
             Start date cannot be empty
@@ -66,7 +65,6 @@
           </div>
           <div
             th:if="${#fields.hasErrors('subject.endDate')}"
-            th:errors="*{subject.endDate}"
             class="alert alert-danger"
           >
             End date cannot be empty

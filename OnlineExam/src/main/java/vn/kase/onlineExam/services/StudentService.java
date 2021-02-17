@@ -88,4 +88,15 @@ public class StudentService {
     }
     
   }
+
+  public Boolean saveMark(Mark mark) {
+    try {
+      markRepo.save(mark);
+      return true;
+    }
+    catch (Exception e) {
+      System.out.println(e.getStackTrace());
+      return false;
+    }
+  }
 }
