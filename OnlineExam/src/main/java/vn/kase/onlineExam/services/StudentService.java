@@ -11,19 +11,17 @@ import vn.kase.onlineExam.model.Mark;
 import vn.kase.onlineExam.model.Subject;
 import vn.kase.onlineExam.model.User;
 import vn.kase.onlineExam.repository.MarkRepository;
-import vn.kase.onlineExam.repository.SubjectRepository;
 import vn.kase.onlineExam.repository.UserRepository;
 import vn.kase.onlineExam.viewModel.StudentAssignmentStatus;
 
 @Service
 public class StudentService {
   
+
 	@Autowired
-  private SubjectRepository subjectRepo;
+	private UserRepository userRepo;
 	@Autowired
-  private UserRepository userRepo;
-  @Autowired
-  private MarkRepository markRepo;
+	private MarkRepository markRepo;
 
   public List<Mark> findStudentMarkForSubject(User student, Subject subject) {
     return markRepo.findByStudentIdAndSubjectId(student.getId(), subject.getId());

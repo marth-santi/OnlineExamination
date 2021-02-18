@@ -17,9 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import vn.kase.onlineExam.model.Subject;
 import vn.kase.onlineExam.model.User;
-import vn.kase.onlineExam.repository.MarkRepository;
 import vn.kase.onlineExam.repository.SubjectRepository;
-import vn.kase.onlineExam.repository.UserRepository;
 import vn.kase.onlineExam.services.StudentService;
 import vn.kase.onlineExam.services.UserService;
 import vn.kase.onlineExam.viewModel.AssignmentVM;
@@ -29,14 +27,14 @@ import vn.kase.onlineExam.viewModel.StudentAssignmentStatus;
 @RequestMapping("/assignment")
 public class AssignmentController {
 
-	@Autowired
-  private SubjectRepository subjectRepo;
-  @Autowired
-  private StudentService studentService;
-  @Autowired
-  private UserService userService;
-  @Autowired
-  private JavaMailSender javaMailSender;
+	  @Autowired
+	  private SubjectRepository subjectRepo;
+	  @Autowired
+	  private StudentService studentService;
+	  @Autowired
+	  private UserService userService;
+	  @Autowired
+	  private JavaMailSender javaMailSender;
   
   @GetMapping("/listexam")
   public ModelAndView startAssignment() {

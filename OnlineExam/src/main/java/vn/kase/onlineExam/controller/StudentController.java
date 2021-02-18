@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import vn.kase.onlineExam.model.Mark;
+import vn.kase.onlineExam.model.Question;
 import vn.kase.onlineExam.model.Subject;
 import vn.kase.onlineExam.model.User;
 import vn.kase.onlineExam.services.MarkService;
@@ -36,14 +37,18 @@ public class StudentController {
 	MarkService markService;
 	
 	@RequestMapping("/viewExam")
-	public String viewExam(ModelMap model,@RequestParam(value = "subjectId", required = true) int subjectId){
+	public String viewExam(ModelMap model,@RequestParam(value = "subjectId", required = true, defaultValue = "0") int subjectId){
 		Optional<Subject> subject = subjectService.findById(subjectId);
 		if(subject.isPresent())
 		{
 			model.addAttribute("subject", subject);
 			return "students/subjectWillDo";
 		}
-		return "students/viewStudent";
+		else {
+			model.addAttribute("question", new Question());
+			model.addAttribute("message", "No exam assigned !!!");
+			return "students/viewStudent";
+		}	
 	}
 	
 	@GetMapping("/doExam")

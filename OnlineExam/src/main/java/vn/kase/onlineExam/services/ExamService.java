@@ -1,6 +1,5 @@
 package vn.kase.onlineExam.services;
 
-import java.sql.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -70,7 +69,7 @@ public class ExamService {
 				correct++;
 		}
 		
-		Integer mark = correct * 100 / total;
+		Integer mark = Math.round(correct * 100 / total);
 		return new Mark()
 				.setMarks(mark)
 				.setSubjectId(examResponse.getSubject().getId());

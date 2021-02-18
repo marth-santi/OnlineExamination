@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.view.RedirectView;
 
 import vn.kase.onlineExam.model.Mark;
 import vn.kase.onlineExam.model.Question;
@@ -66,7 +65,6 @@ public class StudentAPIController {
     // Get current subject taken
     Subject subject = (Subject) request.getSession().getAttribute("subject");
     ExamResponse examResponse = new ExamResponse(subject, listResponse);
-
     // Exam service to mark the response
     Mark mark = examService.markResponse(examResponse);
     mark.setStudentId(student.getId());
