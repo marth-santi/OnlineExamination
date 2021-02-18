@@ -59,7 +59,11 @@ function ExamView() {
 
       let newResponses: IQuestionResponse[];
       newResponses = prevResponses;
-      newResponses[prevResponses.indexOf(response)] = response;
+      newResponses[
+        prevResponses.findIndex(
+          (res: IQuestionResponse) => res.id === response.id
+        )
+      ] = response;
       return newResponses;
     });
   };
@@ -69,6 +73,7 @@ function ExamView() {
     console.log("Exam submit: ", questionResponses);
     setOpenSubmitDlg(false);
     setOpenSubmittedAlert(true);
+    console.log(questionResponses);
     API.postJSON<IQuestionResponse[], Mark>(
       CONSTANT.API.submitExam,
       questionResponses!
@@ -133,7 +138,7 @@ function ExamView() {
         aria-describedby="alert-dialog-description"
       >
         <CircularProgress
-          style={{ color: "green" }}
+          style={{ color: "green", zIndex: 999 }}
           size={200}
         ></CircularProgress>
       </Backdrop>
