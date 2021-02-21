@@ -1,0 +1,1 @@
+insert into tb_users (fullname, mobile, email,address,username,pass,roles,confirm) values ("admin","0903014696","nguyentam.angel@yahoo.com","HCM","admin1","e10adc3949ba59abbe56e057f20f883e",1,1);
